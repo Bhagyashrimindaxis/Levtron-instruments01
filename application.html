@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industrial Level Measurement Applications | Levtron Instruments Pvt Ltd</title>
+  <meta name="description"
+    content="Discover Levtron Instruments specialized level switch and transmitter applications across sugar processing, salt production, chemical plants, food grain packaging, pharmaceuticals, drainage, paint, oil & gas, and coal fields.">
+  <meta name="keywords"
+    content="Levtron Applications, Industrial Level Switch Applications, Sugar Plant Level Switch, Chemical Level Measurement, Food Grain Silo Sensor, Oil Gas Level Transmitter, Drainage Level Switch, Powder Silo Level Sensor">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css?v=6.8">
+
+  <style>
+    /* Custom Styling for Application Page */
+    /* Grid layout for 3 cards per row */
+    #appGrid {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 2rem !important;
+    }
+
+    .app-card-item {
+      height: 100%;
+    }
+
+    @media (max-width: 1024px) {
+      #appGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #appGrid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .app-card {
+      background: #ffffff;
+      border-radius: 18px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .app-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 22px 45px rgba(14, 165, 233, 0.15);
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+
+    .app-card-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: #0b1528;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .app-card:hover .app-card-img {
+      transform: scale(1.06);
+    }
+
+    .app-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(11, 21, 40, 0.88);
+      backdrop-filter: blur(8px);
+      color: #38bdf8;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 2;
+    }
+
+    .app-card-body {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .app-card-title {
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .app-card-text {
+      color: #64748b;
+      font-size: 0.93rem;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .app-recommended-box {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.25rem;
+      border-left: 3px solid var(--primary-cyan);
+    }
+
+    .app-recommended-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #0b1528;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.35rem;
+    }
+
+    .app-recommended-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-blue);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .app-filter-btn {
+      border-radius: 30px;
+      font-weight: 600;
+      padding: 0.55rem 1.4rem;
+      font-size: 0.9rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .app-filter-btn.active {
+      background: #0b1528;
+      color: #38bdf8;
+      border-color: #38bdf8;
+      box-shadow: 0 4px 15px rgba(11, 21, 40, 0.2);
+    }
+
+    /* Application Detail Modal */
+    .app-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 21, 40, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .app-modal-card {
+      background: #ffffff;
+      border-radius: 20px;
+      max-width: 850px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+      position: relative;
+      animation: modalSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .app-modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #0b1528;
+      cursor: pointer;
+      z-index: 10;
+      border: 1px solid #cbd5e1;
+      transition: all 0.2s ease;
+    }
+
+    .app-modal-close:hover {
+      background: #0b1528;
+      color: #38bdf8;
+    }
+
+    .app-modal-header {
+      background: #0b1528;
+      color: #ffffff;
+      padding: 2.25rem 2.5rem 1.75rem;
+      border-radius: 20px 20px 0 0;
+      position: relative;
+    }
+
+    .app-modal-body {
+      padding: 2.25rem 2.5rem;
+    }
+
+    .challenge-pill {
+      background: #f1f5f9;
+      color: #334155;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Dynamic Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <!-- Page Header Banner -->
+  <section class="page-header" style="background: linear-gradient(135deg, #0b1528 0%, #0f172a 50%, #091322 100%); padding: 4.5rem 0 3.5rem; text-align: center; position: relative; overflow: hidden;">
+    <div class="container" style="position: relative; z-index: 2;">
+      <div style="font-size: 0.82rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--primary-cyan); margin-bottom: 0.75rem;">
+        <i class="fas fa-industry" style="margin-right: 6px;"></i> LEVTRON INDUSTRIAL APPLICATIONS
+      </div>
+      <h1 style="font-size: clamp(2.1rem, 3.8vw, 3.2rem); font-weight: 800; color: #ffffff; margin-bottom: 1rem; line-height: 1.25;">
+        Precision Level Measurement for <span style="color: var(--primary-cyan);">Global Industries</span>
+      </h1>
+      <p style="color: #cbd5e1; font-size: 1.05rem; max-width: 760px; margin: 0 auto; line-height: 1.7;">
+        Levtron specializes in compact, high-performance level switches and transmitters designed for dependable, accurate measurement of liquids, slurries, powders, and bulk solids across various process industries.
+      </p>
+    </div>
+  </section>
+
+  <!-- Applications Main Section -->
+  <section class="section" style="padding: 3.5rem 0 5rem; background: #f8fafc;">
+    <div class="container">
+
+      <!-- Industry Filter Bar -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-bottom: 3.25rem;">
+        <button class="btn btn-sm app-filter-btn active" data-filter="all">All Industries (14)</button>
+        <button class="btn btn-sm app-filter-btn btn-secondary" data-filter="food">Food & Agriculture</button>
+        <button class="btn btn-sm app-filter-btn btn-secondary" data-filter="solids">Bulk Solids & Milling</button>
+        <button class="btn btn-sm app-filter-btn btn-secondary" data-filter="chemical">Chemical & Pharma</button>
+        <button class="btn btn-sm app-filter-btn btn-secondary" data-filter="oil">Oil, Gas & Energy</button>
+        <button class="btn btn-sm app-filter-btn btn-secondary" data-filter="water">Water & Infrastructure</button>
+      </div>
+
+      <!-- Application Grid -->
+      <div class="grid grid-3" id="appGrid" style="gap: 2rem;">
+
+        <!-- 1. Sugar Processing -->
+        <div class="app-card-item" data-category="food">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_2.jpeg" alt="Streamlining Sugar Processing" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-seedling" style="margin-right: 4px;"></i> Sugar Processing</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Streamlining Sugar Processing</h3>
+              <p class="app-card-text">
+                Accurate level measurement is vital in the sugar industry for optimizing juice extraction, syrup tanks, boiling pans, crystallizers, and molasses storage under high temperatures and sticky conditions.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> RFLS-300L Full PTFE RF Admittance
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Streamlining Sugar Processing: The Role of Levtron's Level Measurement Solutions"
+                data-badge="Sugar & Agribusiness"
+                data-img="assets/img/app/app_img_2.jpeg"
+                data-desc="In sugar manufacturing, process vessels experience heavy coating buildup, high temperatures, and dense sugar syrup viscosity. Conventional float switches frequently jam or trigger false alarms due to caramelization and sticky residue."
+                data-challenges="Caramelization & Stickiness, High Syrup Viscosity, Steam & Boiling Vessel Turbulence, Corrosive Juice Acid"
+                data-products="RFLS-300L Full PTFE RF Admittance Switch|product-rfls-300l.html, VFLS-400S Compact Vibrating Fork Switch|product-vfls-400s.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Salt Production -->
+        <div class="app-card-item" data-category="food">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_3.jpg" alt="Optimizing Salt Production" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-cubes" style="margin-right: 4px;"></i> Salt Production</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Optimizing Salt Production</h3>
+              <p class="app-card-text">
+                Reliable level measurement is vital in the salt industry for ensuring product consistency, managing brine tanks, salt slurry hoppers, and preventing bin overflows under heavy corrosive salt environments.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> RFLS-300S Standard RF Admittance
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Optimizing Salt Production with Accurate Level Measurement"
+                data-badge="Salt & Mineral Processing"
+                data-img="assets/img/app/app_img_3.jpg"
+                data-desc="Salt processing involves saturated brine solutions, damp crystalline salt, and high salinity that cause severe galvanic corrosion and material bridging in storage silos."
+                data-challenges="Severe Chloride Corrosion, Damp Salt Caking & Bridging, Variable Slurry Density, Abrasive Crystals"
+                data-products="RFLS-300S Standard RF Admittance Level Switch|product-rfls-300s.html, RPLS-600S Rotating Paddle Level Switch|product-rpls-600s.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Food Grain Packaging -->
+        <div class="app-card-item" data-category="food">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_4.jpg" alt="Optimizing Food Grain Packaging" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-wheat-awn" style="margin-right: 4px;"></i> Grain Packaging</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Food Grain Packaging</h3>
+              <p class="app-card-text">
+                Accurate level measurement is vital in food grain packaging to ensure optimal efficiency and effectively prevent overflow during the packaging process.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> VRLS-500S Vibrating Rod Level Switch
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Optimizing Food Grain Packaging with Levtron's Level Measurement Solutions"
+                data-badge="Grain & Agro Packaging"
+                data-img="assets/img/app/app_img_4.jpg"
+                data-desc="In automated food grain packaging lines, grain silos and surge bins need fast high/low level detection without material jamming or dust interference."
+                data-challenges="Dust Airborne Accumulation, Low Bulk Density Grains, Material Free-Flow Jamming, High-Speed Bin Cycling"
+                data-products="VRLS-500S Vibrating Rod Level Switch|product-vrls-500s.html, RFLS-100S Compact RF Admittance Switch|product-rfls-100s.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Medicine Industry -->
+        <div class="app-card-item" data-category="chemical">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_5.jpg" alt="Medicine Industry Level Sensor" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-pills" style="margin-right: 4px;"></i> Medicine Industry</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Medicine & Pharmaceutical Industry</h3>
+              <p class="app-card-text">
+                Accurate level measurement is vital in the medicine industry for precise drug formulation and contamination prevention. Discover how our solutions enhance safety and efficiency.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> IPLS-1000L Infra Point Level Switch
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Precision Level Measurement in the Medicine Industry"
+                data-badge="Pharmaceutical & Life Sciences"
+                data-img="assets/img/app/app_img_5.jpg"
+                data-desc="Pharmaceutical processing requires ultra-clean, non-contaminating level sensors capable of handling CIP (Clean-in-Place) and SIP (Steam-in-Place) high-temperature sterilization cycles."
+                data-challenges="Sterile Hygienic Compliance, CIP/SIP Steam Cycles, Bubbling & Foaming Reagents, Non-Contact Optical Sensing"
+                data-products="IPLS-1000L Infra Point Level Switch|product-ipls-1000l.html, MCLS-900L Minicap Capacitive Sensor|product-mcls-900l.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Honey Producing Units -->
+        <div class="app-card-item" data-category="food">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_6.jpg" alt="Honey Producing Units" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-jar" style="margin-right: 4px;"></i> Honey Processing</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Honey Producing Units</h3>
+              <p class="app-card-text">
+                Accurate level measurement is essential in the Honey Producing Units for maintaining accurate level in tanks. Discover how our solutions optimize production and ensure product integrity.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> IPLS-1000L Infra Point Level Switch
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Precision Level Measurement in the Honey Producing Units"
+                data-badge="Food & Viscous Liquids"
+                data-img="assets/img/app/app_img_6.jpg"
+                data-desc="Honey processing requires non-intrusive level switches that operate reliably despite extreme stickiness, high viscosity, and crystallization tendency."
+                data-challenges="High Viscosity Clogging, Sticky Residue Coating, Temperature Variation, Hygienic Food Grade Stainless SS316L"
+                data-products="IPLS-1000L Infra Point Level Switch|product-ipls-1000l.html, RFLS-300L Full PTFE RF Admittance|product-rfls-300l.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Drainage Systems -->
+        <div class="app-card-item" data-category="water">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_7.jpg" alt="Drainage Systems Level Measurement" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-water" style="margin-right: 4px;"></i> Drainage Systems</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Drainage Systems</h3>
+              <p class="app-card-text">
+                Accurate level measurement is crucial in drainage systems for monitoring water levels and preventing flooding. Discover how our solutions enhance safety and efficiency in water management.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> HSLT-2000L Hydrostatic Transmitter
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Precision Level Measurement in Drainage Systems"
+                data-badge="Water & Environmental Management"
+                data-img="assets/img/app/app_img_7.jpg"
+                data-desc="Drainage and effluent sumps operate in harsh, debris-laden wastewater conditions. Continuous water level measurement enables smart automated pump control."
+                data-challenges="Heavy Debris & Sewage Sludge, Submerged Operations, Corrosive Effluents, Automated Multi-Pump Triggers"
+                data-products="HSLT-2000L Hydrostatic Submersible Transmitter|product-hslt-2000l.html, MFLS-1300L Multi-Point Float Level Switch|product-mfls-1300l.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Material Handling Plant -->
+        <div class="app-card-item" data-category="solids">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_8.jpg" alt="Material Handling Plant" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-truck-ramp-box" style="margin-right: 4px;"></i> Material Handling</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Material Handling Plant</h3>
+              <p class="app-card-text">
+                Accurate level measurement is essential in the Material Handling Plant for managing stockpiles and optimizing material flow. Discover how our solutions improve efficiency and reduce waste.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> RFLS-300SD Disc Probe RF Switch
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Precision Level Measurement in the Material Handling Plant"
+                data-badge="Bulk Solids & Heavy Logistics"
+                data-img="assets/img/app/app_img_8.jpg"
+                data-desc="Material handling transfer chutes experience severe mechanical impact, abrasive rock friction, and high dust concentrations during continuous conveyor operations."
+                data-challenges="Heavy Mechanical Chute Impact, High Abrasive Friction, Dust & Moisture Buildup, Chute Blockage Alerts"
+                data-products="RFLS-300SD Disc Probe RF Admittance|product-rfls-300sd.html, RPLS-600S Heavy Duty Rotating Paddle|product-rpls-600s.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Paint Industry -->
+        <div class="app-card-item" data-category="chemical">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_9.jpg" alt="Paint Industry Level Measurement" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-fill-drip" style="margin-right: 4px;"></i> Paint Industry</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Paint Industry</h3>
+              <p class="app-card-text">
+                Accurate level measurement is vital in the paint industry for ensuring consistent formulations and preventing spills. Discover how our solutions enhance quality control and operational efficiency.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> VFLS-700L Flameproof Liquid Fork
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Precision Level Measurement in the Paint Industry"
+                data-badge="Paint & Solvent Processing"
+                data-img="assets/img/app/app_img_9.jpg"
+                data-desc="Paint mixing tanks utilize volatile solvents, sticky resin polymers, and pigments requiring explosion-proof (Flameproof Ex d) level instrumentation."
+                data-challenges="Volatile Explosive Vapors (Ex d), Sticky Resin Coating, Solvent Corrosion, High Batch Consistency"
+                data-products="VFLS-700L Flameproof Liquid Fork Switch|product-vfls-700l.html, CPLT-1200L Continuous Capacitance Transmitter|product-cplt-1200l.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Flour Mills -->
+        <div class="app-card-item" data-category="solids">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_10.jpg" alt="Flour Mills Level Switch" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-mortar-pestle" style="margin-right: 4px;"></i> Flour Mills</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Flour Mills</h3>
+              <p class="app-card-text">
+                Accurate level measurement is essential in the Flour Mills for consistent production and overflow prevention. Discover how our solutions optimize inventory management and quality control.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> RPLS-600S Rotating Paddle Switch
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Precision Level Measurement in the Flour Mills"
+                data-badge="Flour & Food Powders"
+                data-img="assets/img/app/app_img_10.jpg"
+                data-desc="Flour milling involves extremely light, fine wheat flour and bran powders that create high static electricity and air entrainment in storage silos."
+                data-challenges="Ultra-Low Bulk Density, Fine Powder Suspension, Static Electrical Charges, Silo Arching & Rat-Holing"
+                data-products="RPLS-600S Rotating Paddle Level Switch|product-rpls-600s.html, VRLS-500S Vibrating Rod Level Switch|product-vrls-500s.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Chemical Industry -->
+        <div class="app-card-item" data-category="chemical">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_11.jpg" alt="Chemical Industry Level Measurement" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-vial" style="margin-right: 4px;"></i> Chemical Industry</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Chemical Industry</h3>
+              <p class="app-card-text">
+                Accurate level measurement is critical in the chemical industry for safe handling and precise mixing. Discover how our solutions enhance process control and improve safety.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> FMLT-1800LS 80GHz Radar Level Transmitter
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Precision Level Measurement in the Chemical Industry"
+                data-badge="Chemical & Petrochemical"
+                data-img="assets/img/app/app_img_11.jpg"
+                data-desc="Chemical processing requires non-contact or PTFE armored sensors resistant to concentrated nitric, sulfuric, and hydrochloric acids under high pressure."
+                data-challenges="Highly Aggressive Acid Corrosion, High Reactor Temperatures & Pressure, Toxic Vapor Off-Gassing, SIL-Rated Overfill Protection"
+                data-products="FMLT-1800LS 80GHz FMCW Radar Level Transmitter|product-fmlt-1800ls.html, RFLS-300L Full PTFE RF Admittance Switch|product-rfls-300l.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Oil Industry -->
+        <div class="app-card-item" data-category="oil">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_12.jpg" alt="Oil Industry Level Measurement" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-oil-well" style="margin-right: 4px;"></i> Oil Industry</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Oil Industry</h3>
+              <p class="app-card-text">
+                Accurate level measurement is vital in the oil industry for ensuring safe storage and efficient processing. Discover how our solutions enhance operational efficiency and prevent spills.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> VFLS-700L Flameproof Liquid Fork
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Precision Level Measurement in the Oil Industry"
+                data-badge="Oil & Gas Refining"
+                data-img="assets/img/app/app_img_12.jpg"
+                data-desc="Refining operations require certified flameproof (Ex d) level switches for crude oil separator tanks, knock-out drums, and fuel storage farms."
+                data-challenges="Hazardous Ex Zone 1/2 Environments, Oil-Water Emulsion Interface, High Vessel Pressure, Toxic Hydrocarbon Vapors"
+                data-products="VFLS-700L Flameproof Liquid Fork Switch|product-vfls-700l.html, HFLS-1600L Side Mounted Magnetic Float Switch|product-hfls-1600l.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. Glass Powder Industry -->
+        <div class="app-card-item" data-category="solids">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_13.jpg" alt="Glass Powder Industry" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-glass-water" style="margin-right: 4px;"></i> Glass Powder</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Glass Powder Industry</h3>
+              <p class="app-card-text">
+                Accurate level measurement is essential in the glass powder industry for consistent production and overflow prevention. Learn how our solutions enhance quality control and optimize handling.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> RFLS-300HD Heavy Duty RF Switch
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Precision Level Measurement in the Glass Powder Industry"
+                data-badge="Glass & Ceramic Powders"
+                data-img="assets/img/app/app_img_13.jpg"
+                data-desc="Silica sand and glass frit powders cause extreme abrasive wear on standard level probes and require heavy-duty reinforced SS316 probes."
+                data-challenges="Severe Silica Abrasion, Dense Powder Weight, Dust Infiltration, High Furnace Feed Silo Duty"
+                data-products="RFLS-300HD Heavy Duty RF Admittance Level Switch|product-rfls-300hd.html, RFLS-100S Compact RF Admittance Switch|product-rfls-100s.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13. Coal Fields -->
+        <div class="app-card-item" data-category="oil">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_14.jpg" alt="Coal Fields Level Switch" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-bolt" style="margin-right: 4px;"></i> Coal Fields</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Coal Fields</h3>
+              <p class="app-card-text">
+                Accurate level measurement is essential in the Coal Fields for maintaining efficient operations and preventing overflow. Learn how our solutions enhance safety and optimize material handling.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> RFLS-300SR Rope Type RF Switch
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Precision Level Measurement in the Coal Fields"
+                data-badge="Coal Mining & Power Generation"
+                data-img="assets/img/app/app_img_14.jpg"
+                data-desc="Deep coal silos and fly ash precipitator hoppers experience heavy vibration, high dust, and deep probe insertion requirements up to 20 meters."
+                data-challenges="Deep Silo Insertion (up to 20m), Heavy Coal Impact, Hot Fly Ash Temperature, Structural Vibration"
+                data-products="RFLS-300SR Rope Type RF Admittance Switch|product-rfls-300sr.html, RPLS-600S Rotating Paddle Level Switch|product-rpls-600s.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14. Petroleum -->
+        <div class="app-card-item" data-category="oil">
+          <div class="app-card">
+            <div class="app-card-img-wrap">
+              <img src="assets/img/app/app_img_15.jpg" alt="Petroleum Operations" class="app-card-img">
+              <span class="app-badge"><i class="fas fa-gas-pump" style="margin-right: 4px;"></i> Petroleum</span>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-title">Precision Level Measurement in Petroleum</h3>
+              <p class="app-card-text">
+                Accurate level measurement is vital in the petroleum industry for ensuring safe storage and efficient processing. Discover how Levtron's solutions enhance operational efficiency and prevent spills.
+              </p>
+              <div class="app-recommended-box">
+                <div class="app-recommended-label">RECOMMENDED INSTRUMENT</div>
+                <div class="app-recommended-name">
+                  <i class="fas fa-check-circle"></i> CPLT-1200F Fuel Level Transmitter
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm open-app-modal" style="width: 100%; border-radius: 10px; font-weight: 600;"
+                data-title="Precision Level Measurement in Petroleum"
+                data-badge="Petroleum Fuel Management"
+                data-img="assets/img/app/app_img_15.jpg"
+                data-desc="Bulk diesel and gasoline tanks require continuous, high-accuracy fuel level transmitters for real-time inventory monitoring and leak detection."
+                data-challenges="Flammable Fuel Vapors, High Measurement Precision, Continuous Inventory Tracking, Tank Leak Detection"
+                data-products="CPLT-1200F Fuel Level Transmitter|product-cplt-1200f.html, LMLT-2100LT Magnetic Level Gauge & Indicator|product-lmlt-2100lt.html">
+                Explore Application Details <i class="fas fa-arrow-right" style="margin-left: 6px; font-size: 0.8rem;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Custom Solution Call-to-Action Section -->
+  <section class="section" style="background: linear-gradient(135deg, #0b1528 0%, #0f172a 100%); color: #ffffff; padding: 4.5rem 0; text-align: center; position: relative;">
+    <div class="container" style="max-width: 850px;">
+      <div style="font-size: 0.82rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-cyan); margin-bottom: 0.75rem;">
+        NEED A TAILORED LEVEL MEASUREMENT SOLUTION?
+      </div>
+      <h2 style="font-size: clamp(1.8rem, 3.2vw, 2.7rem); font-weight: 800; color: #ffffff; margin-bottom: 1.25rem;">
+        Have a Specific Industrial Application or Custom Tank Challenge?
+      </h2>
+      <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem;">
+        Our application engineering team works closely with plant managers and OEM integrators to configure custom probe lengths, high-temperature extensions, and chemical-resistant coatings.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="contact.html" class="btn btn-primary" style="padding: 0.85rem 2rem; border-radius: 30px; font-weight: 700; font-size: 1rem; color: #ffffff;">
+          <i class="fas fa-headset" style="margin-right: 8px;"></i> Talk to Application Engineer
+        </a>
+        <a href="products.html" class="btn btn-secondary" style="padding: 0.85rem 2rem; border-radius: 30px; font-weight: 700; font-size: 1rem; background: rgba(255,255,255,0.1); color: #ffffff; border-color: rgba(255,255,255,0.2);">
+          Browse All Products
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dynamic Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Application Detail Modal Overlay -->
+  <div class="app-modal-overlay" id="appModal">
+    <div class="app-modal-card">
+      <button class="app-modal-close" id="closeAppModal" aria-label="Close modal">&times;</button>
+      <div class="app-modal-header">
+        <span id="modalAppBadge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-weight: 700; font-size: 0.78rem; padding: 0.35rem 0.85rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(56, 189, 248, 0.3);">
+          INDUSTRIAL APPLICATION
+        </span>
+        <h2 id="modalAppTitle" style="font-size: 1.6rem; font-weight: 800; color: #ffffff; margin-top: 0.85rem; line-height: 1.3;">
+          Application Title
+        </h2>
+      </div>
+      <div class="app-modal-body">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.75rem; align-items: center; margin-bottom: 2rem;">
+          <div style="background: #0b1528; border-radius: 14px; padding: 0.75rem; overflow: hidden; display: flex; align-items: center; justify-content: center; height: 240px;">
+            <img id="modalAppImage" src="" alt="Application detail image" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+          </div>
+          <div>
+            <h4 style="font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.75rem;">
+              <i class="fas fa-circle-info" style="color: var(--color-blue); margin-right: 6px;"></i> Process Overview
+            </h4>
+            <p id="modalAppDesc" style="color: #475569; font-size: 0.95rem; line-height: 1.65; margin-bottom: 1rem;">
+              Application description text goes here.
+            </p>
+          </div>
+        </div>
+
+        <!-- Process Challenges Section -->
+        <div style="margin-bottom: 2rem; background: #f8fafc; padding: 1.5rem; border-radius: 14px; border: 1px solid #e2e8f0;">
+          <h4 style="font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.85rem;">
+            <i class="fas fa-triangle-exclamation" style="color: #eab308; margin-right: 6px;"></i> Key Industrial Process Challenges
+          </h4>
+          <div id="modalAppChallenges">
+            <!-- Dynamically populated challenge pills -->
+          </div>
+        </div>
+
+        <!-- Recommended Levtron Products -->
+        <div style="margin-bottom: 2rem;">
+          <h4 style="font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.85rem;">
+            <i class="fas fa-microchip" style="color: var(--color-blue); margin-right: 6px;"></i> Recommended Levtron Instrument Models
+          </h4>
+          <div id="modalAppProducts" style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <!-- Dynamically populated product link cards -->
+          </div>
+        </div>
+
+        <!-- Action Footer in Modal -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0;">
+          <span style="font-size: 0.85rem; color: #64748b;">
+            <i class="fas fa-shield-halved" style="color: #10b981; margin-right: 4px;"></i> Proven Field Reliability & ISO 9001 Certified Quality
+          </span>
+          <a href="contact.html" class="btn btn-primary btn-sm" style="border-radius: 20px; font-weight: 700; padding: 0.65rem 1.4rem; color: #ffffff;">
+            Request Quote for this Application <i class="fas fa-paper-plane" style="margin-left: 6px;"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Dependencies -->
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    // Industry Category Filter Logic
+    const filterBtns = document.querySelectorAll('.app-filter-btn');
+    const appCards = document.querySelectorAll('.app-card-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        filterBtns.forEach(b => {
+          b.classList.remove('active');
+          b.classList.add('btn-secondary');
+        });
+        this.classList.add('active');
+        this.classList.remove('btn-secondary');
+
+        const filter = this.getAttribute('data-filter');
+
+        appCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Application Detail Modal Logic
+    const appModal = document.getElementById('appModal');
+    const closeAppModal = document.getElementById('closeAppModal');
+    const modalAppTitle = document.getElementById('modalAppTitle');
+    const modalAppBadge = document.getElementById('modalAppBadge');
+    const modalAppImage = document.getElementById('modalAppImage');
+    const modalAppDesc = document.getElementById('modalAppDesc');
+    const modalAppChallenges = document.getElementById('modalAppChallenges');
+    const modalAppProducts = document.getElementById('modalAppProducts');
+
+    document.querySelectorAll('.open-app-modal').forEach(btn => {
+      btn.addEventListener('click', function() {
+        modalAppTitle.textContent = this.getAttribute('data-title');
+        modalAppBadge.textContent = this.getAttribute('data-badge');
+        modalAppImage.src = this.getAttribute('data-img');
+        modalAppDesc.textContent = this.getAttribute('data-desc');
+
+        // Parse Challenges
+        const challenges = this.getAttribute('data-challenges').split(',');
+        modalAppChallenges.innerHTML = '';
+        challenges.forEach(c => {
+          const pill = document.createElement('span');
+          pill.className = 'challenge-pill';
+          pill.innerHTML = `<i class="fas fa-check" style="color: #10b981;"></i> ${c.trim()}`;
+          modalAppChallenges.appendChild(pill);
+        });
+
+        // Parse Products
+        const productsRaw = this.getAttribute('data-products').split(',');
+        modalAppProducts.innerHTML = '';
+        productsRaw.forEach(pStr => {
+          const parts = pStr.split('|');
+          const pName = parts[0].trim();
+          const pLink = parts[1] ? parts[1].trim() : 'products.html';
+
+          const pCard = document.createElement('a');
+          pCard.href = pLink;
+          pCard.style.cssText = 'display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.25rem; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; text-decoration: none; color: #0f172a; font-weight: 600; font-size: 0.92rem; transition: all 0.2s ease;';
+          pCard.innerHTML = `
+            <span><i class="fas fa-layer-group" style="color: var(--color-blue); margin-right: 8px;"></i> ${pName}</span>
+            <span style="color: var(--color-blue); font-size: 0.82rem; font-weight: 700;">View Specs <i class="fas fa-arrow-right" style="margin-left: 4px;"></i></span>
+          `;
+          pCard.addEventListener('mouseenter', function() {
+            this.style.borderColor = '#38bdf8';
+            this.style.background = '#f0f9ff';
+          });
+          pCard.addEventListener('mouseleave', function() {
+            this.style.borderColor = '#cbd5e1';
+            this.style.background = '#ffffff';
+          });
+
+          modalAppProducts.appendChild(pCard);
+        });
+
+        appModal.style.display = 'flex';
+      });
+    });
+
+    if (closeAppModal) {
+      closeAppModal.addEventListener('click', () => {
+        appModal.style.display = 'none';
+      });
+    }
+
+    if (appModal) {
+      appModal.addEventListener('click', (e) => {
+        if (e.target === appModal) {
+          appModal.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+
+</html>

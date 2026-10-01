@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+  <g transform="translate(10, 10)">
+    <polygon points="30,2 58,18 58,42 30,58 2,42 2,18" fill="#f1f5f9" stroke="#2563eb" stroke-width="2"/>
+    <path d="M12 38 L20 38 L25 22 L32 44 L38 28 L43 38 L48 38" fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="25" cy="22" r="3.5" fill="#2563eb"/>
+    <circle cx="38" cy="28" r="3.5" fill="#dc2626"/>
+    <circle cx="32" cy="44" r="3" fill="#0f172a"/>
+  </g>
+  <text x="78" y="42" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="30" letter-spacing="2" fill="#0f172a">
+    LEVTRON
+  </text>
+  <text x="80" y="58" font-family="'Inter', sans-serif" font-weight="700" font-size="10" letter-spacing="3" fill="#2563eb">
+    INSTRUMENTS PVT LTD
+  </text>
+  <line x1="78" y1="64" x2="280" y2="64" stroke="#dc2626" stroke-width="2" stroke-linecap="round"/>
+</svg>
