@@ -787,6 +787,154 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* =========================================================================
+       CERTIFICATE LIGHTBOX MODAL (IN-PLACE POPUP)
+       ========================================================================= */
+    .cert-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(10, 11, 14, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cert-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .cert-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+    }
+
+    .cert-modal-dialog {
+      background: #ffffff;
+      border-radius: 18px;
+      max-width: 840px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      transform: scale(0.92) translateY(24px);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .cert-modal.active .cert-modal-dialog {
+      transform: scale(1) translateY(0);
+    }
+
+    .cert-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f8fafc;
+      gap: 1rem;
+    }
+
+    .cert-modal-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .cert-modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
+
+    .cert-modal-close {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.15rem;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .cert-modal-close:hover {
+      background: #ef4444;
+      color: #ffffff;
+      border-color: #ef4444;
+      transform: rotate(90deg);
+    }
+
+    .cert-modal-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f1f5f9;
+      max-height: calc(90vh - 130px);
+    }
+
+    .cert-modal-img {
+      max-width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+      background: #ffffff;
+      transition: transform 0.3s ease;
+    }
+
+    .cert-modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.5rem;
+      border-top: 1px solid #e2e8f0;
+      background: #ffffff;
+    }
+
+    .cert-nav-btn {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      color: #0f172a;
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s ease;
+    }
+
+    .cert-nav-btn:hover {
+      background: var(--color-blue);
+      color: #ffffff;
+      border-color: var(--color-blue);
+    }
   </style>
 </head>
 
@@ -1259,12 +1407,14 @@
       <div class="certifications-grid">
         
         <!-- Certificate 1: IP68 -->
-        <a href="assets/img/LEVTRON INSTRUMENTS - IP68.pdf" target="_blank" rel="noopener noreferrer" class="cert-card-item" title="Click to view IP68 Certificate">
+        <div class="cert-card-item" role="button" tabindex="0" data-cert-index="0"
+          data-cert-title="Ingress Protection (IP68)" data-cert-badge="IP68 Certified"
+          data-cert-img="assets/img/cert-ip68.jpg" style="cursor: pointer;" title="Click to view IP68 Certificate">
           <div class="cert-card-inner">
             <div class="cert-img-box">
               <img src="assets/img/cert-ip68.jpg" alt="IP68 Ingress Protection Certificate - Levtron Instruments">
               <div class="cert-hover-overlay">
-                <span class="cert-view-btn"><i class="fas fa-file-pdf"></i> View Certificate</span>
+                <span class="cert-view-btn"><i class="fas fa-eye"></i> View Certificate</span>
               </div>
             </div>
             <div class="cert-info">
@@ -1273,15 +1423,17 @@
               <p class="cert-desc">Dust-tight & continuous water immersion protection certificate</p>
             </div>
           </div>
-        </a>
+        </div>
 
         <!-- Certificate 2: ISO 9001:2015 QMS -->
-        <a href="assets/img/LEVTRON INSTRUMENTS PRIVATE LIMITED-QMS.pdf" target="_blank" rel="noopener noreferrer" class="cert-card-item" title="Click to view ISO 9001:2015 QMS Certificate">
+        <div class="cert-card-item" role="button" tabindex="0" data-cert-index="1"
+          data-cert-title="Quality Management (ISO 9001:2015)" data-cert-badge="ISO 9001:2015"
+          data-cert-img="assets/img/cert-qms.jpg" style="cursor: pointer;" title="Click to view ISO 9001:2015 QMS Certificate">
           <div class="cert-card-inner">
             <div class="cert-img-box">
               <img src="assets/img/cert-qms.jpg" alt="ISO 9001:2015 Quality Management System Certificate - Levtron Instruments">
               <div class="cert-hover-overlay">
-                <span class="cert-view-btn"><i class="fas fa-file-pdf"></i> View Certificate</span>
+                <span class="cert-view-btn"><i class="fas fa-eye"></i> View Certificate</span>
               </div>
             </div>
             <div class="cert-info">
@@ -1290,15 +1442,17 @@
               <p class="cert-desc">Standardized manufacturing & high quality management systems</p>
             </div>
           </div>
-        </a>
+        </div>
 
         <!-- Certificate 3: RoHS 3 -->
-        <a href="assets/img/LEVTRON INSTRUMENTS PRIVATE LIMITED-RoHS 3.pdf" target="_blank" rel="noopener noreferrer" class="cert-card-item" title="Click to view RoHS 3 Certificate">
+        <div class="cert-card-item" role="button" tabindex="0" data-cert-index="2"
+          data-cert-title="RoHS 3 Directive Compliance" data-cert-badge="RoHS 3 Compliant"
+          data-cert-img="assets/img/cert-rohs.jpg" style="cursor: pointer;" title="Click to view RoHS 3 Certificate">
           <div class="cert-card-inner">
             <div class="cert-img-box">
               <img src="assets/img/cert-rohs.jpg" alt="RoHS 3 Compliance Certificate - Levtron Instruments">
               <div class="cert-hover-overlay">
-                <span class="cert-view-btn"><i class="fas fa-file-pdf"></i> View Certificate</span>
+                <span class="cert-view-btn"><i class="fas fa-eye"></i> View Certificate</span>
               </div>
             </div>
             <div class="cert-info">
@@ -1307,15 +1461,17 @@
               <p class="cert-desc">EU environmental & hazardous substances restriction compliance</p>
             </div>
           </div>
-        </a>
+        </div>
 
         <!-- Certificate 4: Certificate of Registration 1 -->
-        <a href="assets/img/WhatsApp Image 2026-09-30 at 4.02.51 PM.jpeg" target="_blank" rel="noopener noreferrer" class="cert-card-item" title="Click to view Certificate of Registration">
+        <div class="cert-card-item" role="button" tabindex="0" data-cert-index="3"
+          data-cert-title="Certificate of Registration" data-cert-badge="Accreditation"
+          data-cert-img="assets/img/WhatsApp Image 2026-09-30 at 4.02.51 PM.jpeg" style="cursor: pointer;" title="Click to view Certificate of Registration">
           <div class="cert-card-inner">
             <div class="cert-img-box">
               <img src="assets/img/WhatsApp Image 2026-09-30 at 4.02.51 PM.jpeg" alt="Certificate of Registration - Levtron Instruments">
               <div class="cert-hover-overlay">
-                <span class="cert-view-btn"><i class="fas fa-expand"></i> View Certificate</span>
+                <span class="cert-view-btn"><i class="fas fa-eye"></i> View Certificate</span>
               </div>
             </div>
             <div class="cert-info">
@@ -1324,15 +1480,17 @@
               <p class="cert-desc">Official certification of registration & compliance verification</p>
             </div>
           </div>
-        </a>
+        </div>
 
         <!-- Certificate 5: Certificate of Compliance 2 -->
-        <a href="assets/img/WhatsApp Image 2026-09-30 at 4.03.00 PM.jpeg" target="_blank" rel="noopener noreferrer" class="cert-card-item" title="Click to view Certificate of Compliance">
+        <div class="cert-card-item" role="button" tabindex="0" data-cert-index="4"
+          data-cert-title="Certificate of Compliance" data-cert-badge="Compliance"
+          data-cert-img="assets/img/WhatsApp Image 2026-09-30 at 4.03.00 PM.jpeg" style="cursor: pointer;" title="Click to view Certificate of Compliance">
           <div class="cert-card-inner">
             <div class="cert-img-box">
               <img src="assets/img/WhatsApp Image 2026-09-30 at 4.03.00 PM.jpeg" alt="Certificate of Compliance - Levtron Instruments">
               <div class="cert-hover-overlay">
-                <span class="cert-view-btn"><i class="fas fa-expand"></i> View Certificate</span>
+                <span class="cert-view-btn"><i class="fas fa-eye"></i> View Certificate</span>
               </div>
             </div>
             <div class="cert-info">
@@ -1341,11 +1499,39 @@
               <p class="cert-desc">Conformity with rigorous industrial manufacturing safety standards</p>
             </div>
           </div>
-        </a>
+        </div>
 
       </div>
     </div>
   </section>
+
+  <!-- Certificate Lightbox Modal (Opens In-Place Without Leaving Page) -->
+  <div class="cert-modal" id="certModal" aria-hidden="true" role="dialog" aria-labelledby="certModalTitle">
+    <div class="cert-modal-backdrop" id="certModalBackdrop"></div>
+    <div class="cert-modal-dialog">
+      <div class="cert-modal-header">
+        <div class="cert-modal-title-wrap">
+          <span class="cert-badge" id="certModalBadge" style="margin-bottom: 0;">Certificate</span>
+          <h3 class="cert-modal-title" id="certModalTitle">Certificate View</h3>
+        </div>
+        <button type="button" class="cert-modal-close" id="certModalClose" aria-label="Close certificate">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="cert-modal-body">
+        <img src="" alt="Certificate View" class="cert-modal-img" id="certModalImg">
+      </div>
+      <div class="cert-modal-footer">
+        <button type="button" class="cert-nav-btn" id="certPrevBtn">
+          <i class="fas fa-chevron-left"></i> Previous
+        </button>
+        <span class="cert-counter-indicator" id="certCounterIndicator" style="font-size: 0.85rem; font-weight: 600; color: #64748b;">1 of 5</span>
+        <button type="button" class="cert-nav-btn" id="certNextBtn">
+          Next <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Reusable Footer -->
   <!-- Dynamic Footer Placeholder -->
@@ -1426,6 +1612,85 @@
           requestAnimationFrame(updateCounter);
         });
       }
+
+      // 3. In-Place Certificate Lightbox Modal Controller
+      const certModal = document.getElementById('certModal');
+      const certModalImg = document.getElementById('certModalImg');
+      const certModalTitle = document.getElementById('certModalTitle');
+      const certModalBadge = document.getElementById('certModalBadge');
+      const certCounterIndicator = document.getElementById('certCounterIndicator');
+      const certCards = document.querySelectorAll('.cert-card-item');
+
+      let currentCertIndex = 0;
+
+      function openCertModal(index) {
+        const card = certCards[index];
+        if (!card) return;
+        currentCertIndex = index;
+        certModalImg.src = card.dataset.certImg;
+        certModalImg.alt = card.dataset.certTitle;
+        certModalTitle.textContent = card.dataset.certTitle;
+        certModalBadge.textContent = card.dataset.certBadge;
+        if (certCounterIndicator) {
+          certCounterIndicator.textContent = `${currentCertIndex + 1} of ${certCards.length}`;
+        }
+        certModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeCertModal() {
+        if (!certModal) return;
+        certModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      certCards.forEach((card, idx) => {
+        card.addEventListener('click', function (e) {
+          e.preventDefault();
+          openCertModal(idx);
+        });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openCertModal(idx);
+          }
+        });
+      });
+
+      const certCloseBtn = document.getElementById('certModalClose');
+      if (certCloseBtn) certCloseBtn.addEventListener('click', closeCertModal);
+
+      const certBackdrop = document.getElementById('certModalBackdrop');
+      if (certBackdrop) certBackdrop.addEventListener('click', closeCertModal);
+
+      const prevBtn = document.getElementById('certPrevBtn');
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function () {
+          const prevIdx = (currentCertIndex - 1 + certCards.length) % certCards.length;
+          openCertModal(prevIdx);
+        });
+      }
+
+      const nextBtn = document.getElementById('certNextBtn');
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+          const nextIdx = (currentCertIndex + 1) % certCards.length;
+          openCertModal(nextIdx);
+        });
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (!certModal || !certModal.classList.contains('active')) return;
+        if (e.key === 'Escape') closeCertModal();
+        if (e.key === 'ArrowLeft') {
+          const prevIdx = (currentCertIndex - 1 + certCards.length) % certCards.length;
+          openCertModal(prevIdx);
+        }
+        if (e.key === 'ArrowRight') {
+          const nextIdx = (currentCertIndex + 1) % certCards.length;
+          openCertModal(nextIdx);
+        }
+      });
     });
   </script>
 </body>
