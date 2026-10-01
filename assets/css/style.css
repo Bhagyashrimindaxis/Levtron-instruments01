@@ -5557,23 +5557,32 @@ textarea.form-control {
 /* ==========================================================================
    ABOUT PAGE: HIGH-END BENTO WHY CHOOSE US & PRECISION SERVICES SHOWCASE
    ========================================================================== */
+.bento-wrapper {
+  margin-top: 0.75rem;
+  margin-bottom: 2.25rem;
+}
+
+.bento-wrapper .section-title {
+  margin-bottom: 1.1rem;
+}
+
 .levtron-bento-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 1.75rem;
+  gap: 1.25rem;
   align-items: stretch;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
 }
 
 .levtron-bento-card {
   background: #0f172a;
   border: 1px solid #1e293b;
-  border-radius: 20px;
-  padding: 2.25rem 2rem;
+  border-radius: 16px;
+  padding: 1.25rem 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   position: relative;
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
@@ -5592,9 +5601,9 @@ textarea.form-control {
 }
 
 .levtron-bento-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-5px);
   border-color: var(--color-blue);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(37, 99, 235, 0.2);
 }
 
 .levtron-bento-card:hover::before {
@@ -5605,78 +5614,80 @@ textarea.form-control {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.7rem;
 }
 
 .levtron-bento-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   background: rgba(37, 99, 235, 0.15);
   border: 1px solid rgba(37, 99, 235, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #38bdf8;
-  font-size: 1.2rem;
+  font-size: 1rem;
   transition: transform 0.35s ease, background 0.35s ease;
 }
 
 .levtron-bento-card:hover .levtron-bento-icon {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.08) rotate(4deg);
   background: var(--color-blue);
   color: #ffffff;
 }
 
 .levtron-bento-tag {
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   font-weight: 800;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   color: #94a3b8;
   background: #1e293b;
   border: 1px solid #334155;
-  padding: 0.2rem 0.65rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 20px;
 }
 
 .levtron-bento-title {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #ffffff;
-  margin-bottom: 0.95rem;
-  line-height: 1.3;
+  margin-bottom: 0.45rem;
+  line-height: 1.25;
 }
 
 .levtron-bento-text {
-  font-size: 0.94rem;
+  font-size: 0.815rem;
   color: #cbd5e1;
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
+  line-height: 1.45;
+  margin-bottom: 0.75rem;
 }
 
 .bento-features-list {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
-  margin-bottom: 1.75rem;
-  padding-top: 0.75rem;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+  padding-top: 0.5rem;
   border-top: 1px dashed rgba(255, 255, 255, 0.12);
 }
 
 .bento-feature-item {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.85rem;
+  gap: 0.45rem;
+  font-size: 0.76rem;
   font-weight: 600;
   color: #e2e8f0;
+  line-height: 1.3;
 }
 
 .bento-feature-item i {
   color: #38bdf8;
-  font-size: 0.88rem;
+  font-size: 0.78rem;
+  flex-shrink: 0;
 }
 
 .bento-action-btn {
@@ -5684,13 +5695,13 @@ textarea.form-control {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0.75rem 1.25rem;
+  padding: 0.48rem 0.95rem;
   background: #1e293b;
   border: 1px solid #334155;
-  border-radius: 12px;
+  border-radius: 10px;
   color: #ffffff;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.78rem;
   text-decoration: none;
   transition: all 0.3s ease;
 }
@@ -5700,11 +5711,12 @@ textarea.form-control {
   border-color: var(--color-blue);
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
 }
 
 .bento-action-btn i {
   transition: transform 0.3s ease;
+  font-size: 0.75rem;
 }
 
 .bento-action-btn:hover i {
@@ -5714,11 +5726,12 @@ textarea.form-control {
 /* Center Bento Image Card */
 .levtron-bento-img-card {
   position: relative;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   border: 1px solid #1e293b;
-  min-height: 340px;
+  min-height: 260px;
+  height: 100%;
 }
 
 .levtron-bento-img-card img {
@@ -5738,7 +5751,7 @@ textarea.form-control {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1.5rem;
+  padding: 0.9rem;
   background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.6) 60%, transparent 100%);
   display: flex;
   align-items: flex-end;
@@ -5748,22 +5761,22 @@ textarea.form-control {
 .bento-floating-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.5rem;
   background: rgba(15, 23, 42, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #ffffff;
-  padding: 0.65rem 1.25rem;
+  padding: 0.42rem 0.9rem;
   border-radius: 50px;
-  font-size: 0.84rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
 .bento-floating-pill i {
   color: #38bdf8;
-  font-size: 1rem;
+  font-size: 0.82rem;
 }
 
 /* Modern Industrial Services Showcase Section */
