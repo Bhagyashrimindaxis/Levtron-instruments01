@@ -852,10 +852,12 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initMissionVisionAnimation();
     initQuoteModal();
+    initPdfModal();
   });
 } else {
   initMissionVisionAnimation();
   initQuoteModal();
+  initPdfModal();
 }
 
 // ==========================================================================
@@ -1301,6 +1303,9 @@ function initPdfModal() {
   }
 
   // Intercept all PDF link clicks to preview on the same screen (bypass form if already registered)
+  if (window._pdfListenerAdded) return;
+  window._pdfListenerAdded = true;
+
   document.addEventListener('click', (e) => {
     const target = e.target.closest('a');
     if (!target) return;
