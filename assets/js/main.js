@@ -136,6 +136,8 @@ function initApp() {
   appInitialized = true;
   loadHeaderAndFooter();
   initPageScripts();
+  initQuoteModal();
+  initPdfModal();
 }
 
 if (document.readyState === 'loading') {
@@ -857,6 +859,7 @@ if (document.readyState === 'loading') {
 }
 
 // ==========================================================================
+// ==========================================================================
 // UNIVERSAL COMPACT REQUEST A QUOTE MODAL FORM SYSTEM
 // ==========================================================================
 function initQuoteModal() {
@@ -865,48 +868,48 @@ function initQuoteModal() {
       <div class="modal-backdrop" id="quoteModal">
         <div class="modal-box quote-modal-box">
           <div class="quote-modal-header-bar">
-            <h3><span class="header-calc-icon">🧮</span> Request Industrial Quote</h3>
+            <h3><span class="header-calc-icon" style="font-size: 1.25rem;">🎛️</span> Request Industrial Quote</h3>
             <button class="quote-modal-close-btn" id="quoteModalClose" onclick="closeQuoteModal()" aria-label="Close Modal"><i class="fas fa-times"></i></button>
           </div>
           
           <div class="quote-modal-body">
             <form id="quoteModalForm" onsubmit="handleQuoteModalSubmit(event)">
               
-              <!-- Field 1: Product / Service Required (At Top for downward dropdown expansion) -->
+              <!-- Field 1: Product / Service Required -->
               <div class="quote-field-group">
                 <label for="quoteProduct">Product / Service Required <span class="req-star">*</span></label>
                 <select id="quoteProduct" required>
                   <option value="">Select Required Service</option>
                   <optgroup label="Level Switches (Point Level)">
-                    <option value="RFLS-100S Compact RF Admittance Switch">RFLS-100S Compact RF Admittance Switch (Solids)</option>
-                    <option value="RFLS-100L Compact RF Admittance Switch">RFLS-100L Compact RF Admittance Switch (Liquids)</option>
-                    <option value="VFLS-200S Standard Vibrating Fork Switch">VFLS-200S Vibrating Fork Switch (Solids)</option>
-                    <option value="RFLS-300S Standard RF Admittance Switch">RFLS-300S Standard RF Admittance (Rod Type)</option>
-                    <option value="RFLS-300L Standard RF Admittance Switch">RFLS-300L Standard RF Admittance (Full PTFE)</option>
-                    <option value="RFLS-300SR Rope Type RF Admittance Switch">RFLS-300SR Rope Type RF Admittance (Deep Silos)</option>
-                    <option value="RFLS-300SD Disc Probe RF Admittance Switch">RFLS-300SD Disc Probe RF Admittance (Chutes)</option>
-                    <option value="RFLS-300HD Heavy Duty RF Admittance Switch">RFLS-300HD Heavy Duty RF Admittance (High Impact)</option>
-                    <option value="VFLS-400S Compact Vibrating Fork Switch">VFLS-400S Compact Vibrating Fork (Grains/Powders)</option>
-                    <option value="VRLS-500S Standard Vibrating Rod Switch">VRLS-500S Vibrating Rod Level Switch</option>
+                    <option value="RFLS-100S Compact RF Admittance Switch (Solids)">RFLS-100S Compact RF Admittance Switch (Solids)</option>
+                    <option value="RFLS-100L Compact RF Admittance Switch (Liquids)">RFLS-100L Compact RF Admittance Switch (Liquids)</option>
+                    <option value="VFLS-200S Vibrating Fork Level Switch">VFLS-200S Vibrating Fork Level Switch (Solids)</option>
+                    <option value="RFLS-300S Standard RF Admittance Level Switch">RFLS-300S Standard RF Admittance (Rod Type)</option>
+                    <option value="RFLS-300L Full PTFE RF Admittance (Liquids)">RFLS-300L Standard RF Admittance (Full PTFE)</option>
+                    <option value="RFLS-300SR Rope Type RF Admittance (Deep Silo)">RFLS-300SR Rope Type RF Admittance (Deep Silos)</option>
+                    <option value="RFLS-300SD Disc Probe RF Admittance (Chute)">RFLS-300SD Disc Probe RF Admittance (Chutes)</option>
+                    <option value="RFLS-300HD Heavy Duty RF Admittance Level Switch">RFLS-300HD Heavy Duty RF Admittance (High Impact)</option>
+                    <option value="VFLS-400S Compact Vibrating Fork Level Switch">VFLS-400S Compact Vibrating Fork (Grains/Powders)</option>
+                    <option value="VRLS-500S Vibrating Rod Level Switch">VRLS-500S Vibrating Rod Level Switch</option>
                     <option value="RPLS-600S Rotating Paddle Level Switch">RPLS-600S Rotating Paddle Level Switch</option>
-                    <option value="VFLS-700L Flameproof Liquid Vibrating Fork">VFLS-700L Flameproof Liquid Vibrating Fork</option>
-                    <option value="MVFLS-800L Miniature Vibrating Fork Switch">MVFLS-800L Miniature Vibrating Fork (40mm)</option>
+                    <option value="VFLS-700L Flameproof Liquid Fork Level Switch">VFLS-700L Flameproof Liquid Vibrating Fork</option>
+                    <option value="MVFLS-800L Miniature Vibrating Fork Level Switch">MVFLS-800L Miniature Vibrating Fork (40mm)</option>
                     <option value="CPLS-900S Capacitance Level Switch">CPLS-900S Capacitance Level Switch (Solids)</option>
-                    <option value="MCLS-900L Miniature Capacitive Switch">MCLS-900L Miniature Capacitive Switch (Liquids)</option>
+                    <option value="MCLS-900L Minicap Capacitive Level Sensor">MCLS-900L Miniature Capacitive Switch (Liquids)</option>
                     <option value="IPLS-1000L Infra Point Level Switch">IPLS-1000L Infra Point Level Switch</option>
-                    <option value="MFLS-1300L Top Mounted Float Level Switch">MFLS-1300L Top Mounted Float Level Switch</option>
-                    <option value="RDLS-1400S Rubber Diaphragm Level Switch">RDLS-1400S Rubber Diaphragm Level Switch</option>
+                    <option value="MFLS-1300L Multi-Point Float Level Switch">MFLS-1300L Top Mounted Float Level Switch</option>
+                    <option value="RDLS-1400S Diaphragm Level Switch">RDLS-1400S Rubber Diaphragm Level Switch</option>
                     <option value="SDLS-1500S Stainless Steel Diaphragm Switch">SDLS-1500S Stainless Steel Diaphragm Switch</option>
-                    <option value="HFLS-1600L Horizontal Float Level Switch">HFLS-1600L Horizontal Float Switch (Side Mount)</option>
-                    <option value="CTLS-1700L Conductivity Level Controller">CTLS-1700L Conductivity Level Controller</option>
+                    <option value="HFLS-1600L Side Mounted Magnetic Float Switch">HFLS-1600L Horizontal Float Switch (Side Mount)</option>
+                    <option value="CTLS-1700L Conductivity Level Switch">CTLS-1700L Conductivity Level Controller</option>
                   </optgroup>
                   <optgroup label="Level Transmitters (Continuous Level)">
-                    <option value="FMLT-1800LS 80GHz Radar Level Transmitter">FMLT-1800LS 80GHz Radar Level Transmitter</option>
-                    <option value="CPLT-1200L Capacitance Level Transmitter">CPLT-1200L Capacitance Level Transmitter</option>
+                    <option value="FMLT-1800LS 80GHz FMCW Radar Level Transmitter">FMLT-1800LS 80GHz Radar Level Transmitter</option>
+                    <option value="CPLT-1200L Continuous Capacitance Level Transmitter">CPLT-1200L Capacitance Level Transmitter</option>
                     <option value="CPLT-1200F Fuel Level Transmitter">CPLT-1200F Fuel Level Transmitter</option>
-                    <option value="HSLT-2000L Submersible Level Transmitter">HSLT-2000L Submersible Level Transmitter</option>
+                    <option value="HSLT-2000L Hydrostatic Submersible Transmitter">HSLT-2000L Submersible Level Transmitter</option>
                     <option value="LULT-2300L Ultrasonic Level Transmitter">LULT-2300L Ultrasonic Level Transmitter</option>
-                    <option value="MFLT-1100L Magnetic Float Level Transmitter">MFLT-1100L Magnetic Float Level Transmitter</option>
+                    <option value="MFLT-1100L Float Level Transmitter">MFLT-1100L Magnetic Float Level Transmitter</option>
                   </optgroup>
                   <optgroup label="Level Indicators & Gauges">
                     <option value="LMLT-2100LT Magnetic Level Gauge & Indicator">LMLT-2100LT Magnetic Level Gauge & Indicator</option>
@@ -957,7 +960,7 @@ function initQuoteModal() {
 
               <!-- Centered Submit Button -->
               <div class="quote-submit-center-wrap">
-                <button type="submit" class="quote-btn-submit-red" id="quoteSubmitBtn">
+                <button type="submit" class="quote-btn-submit-blue" id="quoteSubmitBtn">
                   <i class="fas fa-paper-plane"></i> Submit Quote Request
                 </button>
               </div>
@@ -974,6 +977,10 @@ function initQuoteModal() {
         if (e.target === modal) closeQuoteModal();
       });
     }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeQuoteModal();
+    });
   }
 
   // Intercept all "Get Quote" triggers
@@ -981,10 +988,22 @@ function initQuoteModal() {
     const target = e.target.closest('a, button');
     if (!target) return;
 
+    // Do not intercept if click is inside the quote modal
+    if (target.closest('#quoteModal') || target.closest('.quote-modal-box')) return;
+
     const text = (target.textContent || '').trim().toLowerCase();
     const href = target.getAttribute('href') || '';
+    const isExplicitQuote = target.classList.contains('nav-quote-btn') || 
+                            target.classList.contains('btn-quote-trigger') ||
+                            target.id === 'quoteModalTrigger';
 
-    if (text.includes('get quote') || href.includes('contact.html?product=') || target.classList.contains('btn-quote-trigger')) {
+    // Don't intercept regular "Contact Us" navigation link
+    if (text === 'contact us' || text === 'contact' || target.getAttribute('id') === 'contactNavLink') {
+      return;
+    }
+
+    // Intercept if button has "quote" text or quote trigger class or product query
+    if (isExplicitQuote || text.includes('quote') || href.includes('contact.html?product=')) {
       e.preventDefault();
       
       let productName = '';
@@ -1000,6 +1019,21 @@ function initQuoteModal() {
         if (card) {
           const titleEl = card.querySelector('h3, h2, [data-title]');
           if (titleEl) productName = titleEl.textContent.trim();
+        }
+      }
+
+      // Check single product page details
+      if (!productName) {
+        const pageH2 = document.querySelector('.shop-details-section h2');
+        const pageH1 = document.querySelector('.breadcrumbs-content h1');
+        const pagePath = window.location.pathname.split('/').pop() || '';
+        
+        if (pageH2) {
+          productName = pageH2.textContent.trim();
+        } else if (pageH1) {
+          productName = pageH1.textContent.trim();
+        } else if (pagePath.startsWith('product-')) {
+          productName = pagePath.replace('product-', '').replace('.html', '').toUpperCase();
         }
       }
 
@@ -1022,29 +1056,55 @@ window.openQuoteModal = function (productName) {
   if (successMsg) successMsg.style.display = 'none';
   if (form) form.reset();
 
+  // If not passed, check page content
+  if (!productName) {
+    const pageH2 = document.querySelector('.shop-details-section h2');
+    const pageH1 = document.querySelector('.breadcrumbs-content h1');
+    const pagePath = window.location.pathname.split('/').pop() || '';
+    if (pageH2) productName = pageH2.textContent.trim();
+    else if (pageH1) productName = pageH1.textContent.trim();
+    else if (pagePath.startsWith('product-')) {
+      productName = pagePath.replace('product-', '').replace('.html', '').toUpperCase();
+    }
+  }
+
   if (productName && prodSelect) {
-    let matched = false;
+    let matchedIndex = -1;
     const cleanSearch = productName.toLowerCase().replace(/[^a-z0-9]/g, '');
 
+    // 1. Try exact or substring alphanumeric match
     for (let i = 0; i < prodSelect.options.length; i++) {
       const opt = prodSelect.options[i];
+      if (!opt.value) continue;
       const optClean = (opt.value + ' ' + opt.text).toLowerCase().replace(/[^a-z0-9]/g, '');
-      if (optClean.includes(cleanSearch) || cleanSearch.includes(optClean.slice(0, 10))) {
-        prodSelect.selectedIndex = i;
-        matched = true;
+      if (optClean.includes(cleanSearch) || cleanSearch.includes(optClean.slice(0, 12))) {
+        matchedIndex = i;
         break;
       }
     }
 
-    if (!matched) {
-      for (let i = 0; i < prodSelect.options.length; i++) {
-        const opt = prodSelect.options[i];
-        if (opt.value && (productName.includes(opt.value.split(' ')[0]) || opt.value.includes(productName.split(' ')[0]))) {
-          prodSelect.selectedIndex = i;
-          matched = true;
-          break;
+    // 2. Try matching model codes (e.g. RFLS-100L, 100L, VFLS-200S, etc.)
+    if (matchedIndex === -1) {
+      const modelMatch = productName.match(/[A-Za-z]{2,5}-?[0-9]{3,4}[A-Za-z]{0,3}/i) || 
+                         window.location.pathname.match(/product-([a-z0-9-]+)\.html/i);
+      if (modelMatch) {
+        const code = (modelMatch[1] || modelMatch[0]).replace(/[^a-z0-9]/gi, '').toLowerCase();
+        for (let i = 0; i < prodSelect.options.length; i++) {
+          const opt = prodSelect.options[i];
+          if (!opt.value) continue;
+          const optClean = opt.value.toLowerCase().replace(/[^a-z0-9]/g, '');
+          if (optClean.includes(code)) {
+            matchedIndex = i;
+            break;
+          }
         }
       }
+    }
+
+    if (matchedIndex > 0) {
+      prodSelect.selectedIndex = matchedIndex;
+    } else {
+      prodSelect.selectedIndex = 0;
     }
   } else {
     if (prodSelect) prodSelect.selectedIndex = 0;
@@ -1068,8 +1128,10 @@ window.handleQuoteModalSubmit = function (e) {
   e.preventDefault();
   const product = document.getElementById('quoteProduct').value;
   const name = document.getElementById('quoteName').value;
+  const company = document.getElementById('quoteCompany') ? document.getElementById('quoteCompany').value : '';
   const phone = document.getElementById('quotePhone').value;
   const email = document.getElementById('quoteEmail').value;
+  const message = document.getElementById('quoteMessage') ? document.getElementById('quoteMessage').value : '';
 
   const btn = document.getElementById('quoteSubmitBtn');
   const successMsg = document.getElementById('quoteSuccessMsg');
@@ -1078,6 +1140,30 @@ window.handleQuoteModalSubmit = function (e) {
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
   }
+
+  // Send Lead Email to admin: bhagyashripatare07@gmail.com
+  try {
+    fetch('https://formsubmit.co/ajax/88cf2c5d72c37b46a01c8c24f6a4e5f5', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: `New Industrial Quote Request: ${product}`,
+        _template: 'table',
+        _captcha: 'false',
+        'Customer Name': name,
+        'Phone Number': phone,
+        'Email Address': email,
+        'Company Name': company || 'N/A',
+        'Product Required': product,
+        'Project Specifications': message || 'N/A',
+        'Source Page': window.location.href,
+        'Date & Time': new Date().toLocaleString()
+      })
+    }).catch(err => console.log('Quote notification status:', err));
+  } catch (err) {}
 
   setTimeout(() => {
     if (btn) {
@@ -1094,6 +1180,249 @@ window.handleQuoteModalSubmit = function (e) {
       if (btn) btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Quote Request';
     }, 3200);
   }, 700);
+};
+
+// ==========================================================================
+// UNIVERSAL ON-SCREEN PDF VIEWER & CUSTOMER LEAD FORM GATE SYSTEM
+// ==========================================================================
+window._targetPdfUrl = '';
+window._targetPdfTitle = '';
+
+function initPdfModal() {
+  // 1. PDF Gate Form Modal (Customer Form before viewing PDF)
+  if (!document.getElementById('pdfGateModal')) {
+    const gateModalHTML = `
+      <div class="modal-backdrop" id="pdfGateModal" style="z-index: 2050;">
+        <div class="modal-box quote-modal-box">
+          <div class="quote-modal-header-bar">
+            <h3 style="display: flex; align-items: center; gap: 0.55rem; color: #ffffff; margin: 0; font-size: 1.15rem; font-weight: 700;">
+              <i class="fas fa-file-pdf" style="color: #60a5fa;"></i>
+              <span>Download & View Document</span>
+            </h3>
+            <button class="quote-modal-close-btn" onclick="closePdfGateModal()" aria-label="Close Modal"><i class="fas fa-times"></i></button>
+          </div>
+          
+          <div class="quote-modal-body">
+            <form id="pdfGateForm" onsubmit="handlePdfGateSubmit(event)">
+              <!-- Requested Document Badge -->
+              <div class="quote-field-group">
+                <label style="color: #475569; font-size: 0.84rem; margin-bottom: 0.35rem;">Requested Document</label>
+                <div style="padding: 0.6rem 0.85rem; background: #f1f5f9; border: 1.5px solid #cbd5e1; border-radius: 10px; font-weight: 700; color: #0f172a; font-size: 0.92rem; display: flex; align-items: center; gap: 0.5rem;">
+                  <i class="fas fa-file-alt" style="color: var(--color-blue, #2563eb);"></i>
+                  <span id="pdfGateDocName">Product Document</span>
+                </div>
+              </div>
+
+              <!-- Row 1: Full Name & Company Name -->
+              <div class="quote-form-row-2">
+                <div class="quote-field-group">
+                  <label for="pdfGateName">Full Name <span class="req-star">*</span></label>
+                  <input type="text" id="pdfGateName" placeholder="John Doe" required>
+                </div>
+                <div class="quote-field-group">
+                  <label for="pdfGateCompany">Company Name</label>
+                  <input type="text" id="pdfGateCompany" placeholder="Your Industrial Firm">
+                </div>
+              </div>
+
+              <!-- Row 2: Phone Number & Email Address -->
+              <div class="quote-form-row-2">
+                <div class="quote-field-group">
+                  <label for="pdfGatePhone">Phone Number <span class="req-star">*</span></label>
+                  <input type="tel" id="pdfGatePhone" placeholder="+91 9876543210" required>
+                </div>
+                <div class="quote-field-group">
+                  <label for="pdfGateEmail">Email Address <span class="req-star">*</span></label>
+                  <input type="email" id="pdfGateEmail" placeholder="name@company.com" required>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="quote-submit-center-wrap">
+                <button type="submit" class="quote-btn-submit-blue" id="pdfGateSubmitBtn">
+                  <i class="fas fa-file-pdf"></i> Access & View PDF
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', gateModalHTML);
+
+    const gateModal = document.getElementById('pdfGateModal');
+    if (gateModal) {
+      gateModal.addEventListener('click', (e) => {
+        if (e.target === gateModal) closePdfGateModal();
+      });
+    }
+  }
+
+  // 2. On-Screen PDF Viewer Modal
+  if (!document.getElementById('pdfModal')) {
+    const modalHTML = `
+      <div class="modal-backdrop" id="pdfModal" style="z-index: 2100;">
+        <div class="modal-box pdf-modal-box" style="width: 92%; max-width: 960px; height: 86vh; max-height: 850px; padding: 0 !important; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 25px 60px rgba(0,0,0,0.5);">
+          <div class="quote-modal-header-bar" style="flex-shrink: 0; background: #1e293b; padding: 0.9rem 1.4rem; display: flex; align-items: center; justify-content: space-between;">
+            <h3 style="display: flex; align-items: center; gap: 0.6rem; font-size: 1.05rem; color: #ffffff; margin: 0; font-weight: 700;">
+              <i class="fas fa-file-pdf" style="color: #60a5fa;"></i>
+              <span id="pdfModalTitle">Document Viewer</span>
+            </h3>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <a href="#" id="pdfModalDownload" download class="quote-modal-close-btn" style="text-decoration: none; font-size: 0.85rem;" title="Download PDF"><i class="fas fa-download"></i></a>
+              <button class="quote-modal-close-btn" onclick="closePdfModal()" aria-label="Close Viewer"><i class="fas fa-times"></i></button>
+            </div>
+          </div>
+          <div style="flex-grow: 1; width: 100%; height: calc(100% - 55px); background: #f8fafc; position: relative;">
+            <iframe id="pdfModalIframe" src="" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    const modal = document.getElementById('pdfModal');
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closePdfModal();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closePdfGateModal();
+        closePdfModal();
+      }
+    });
+  }
+
+  // Intercept all PDF link clicks to first open Customer Lead Form
+  document.addEventListener('click', (e) => {
+    const target = e.target.closest('a');
+    if (!target) return;
+
+    // Do not intercept the modal's own download button
+    if (target.id === 'pdfModalDownload') return;
+
+    const href = target.getAttribute('href') || '';
+    if (href.toLowerCase().endsWith('.pdf') || target.classList.contains('btn-pdf-viewer')) {
+      e.preventDefault();
+      const title = target.getAttribute('title') || target.textContent.trim() || 'Document Preview';
+      openPdfGateModal(href, title);
+    }
+  });
+}
+
+window.openPdfGateModal = function (url, title) {
+  window._targetPdfUrl = url;
+  window._targetPdfTitle = title || 'Document';
+
+  let gateModal = document.getElementById('pdfGateModal');
+  if (!gateModal) {
+    initPdfModal();
+    gateModal = document.getElementById('pdfGateModal');
+  }
+
+  const docNameEl = document.getElementById('pdfGateDocName');
+  if (docNameEl) docNameEl.textContent = window._targetPdfTitle;
+
+  const form = document.getElementById('pdfGateForm');
+  if (form) form.reset();
+
+  if (gateModal) {
+    gateModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+};
+
+window.closePdfGateModal = function () {
+  const gateModal = document.getElementById('pdfGateModal');
+  if (gateModal) {
+    gateModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+};
+
+window.handlePdfGateSubmit = function (e) {
+  e.preventDefault();
+  const name = document.getElementById('pdfGateName').value;
+  const company = document.getElementById('pdfGateCompany') ? document.getElementById('pdfGateCompany').value : '';
+  const phone = document.getElementById('pdfGatePhone').value;
+  const email = document.getElementById('pdfGateEmail').value;
+  const docTitle = window._targetPdfTitle || 'Product Document';
+  const pdfUrl = window._targetPdfUrl;
+
+  const btn = document.getElementById('pdfGateSubmitBtn');
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+  }
+
+  // Send Lead Email to admin: bhagyashripatare07@gmail.com
+  try {
+    fetch('https://formsubmit.co/ajax/88cf2c5d72c37b46a01c8c24f6a4e5f5', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: `New Document Access Lead: ${docTitle}`,
+        _template: 'table',
+        _captcha: 'false',
+        'Customer Name': name,
+        'Phone Number': phone,
+        'Email Address': email,
+        'Company Name': company || 'N/A',
+        'Document Requested': docTitle,
+        'Document URL': pdfUrl,
+        'Source Page': window.location.href,
+        'Date & Time': new Date().toLocaleString()
+      })
+    }).catch(err => console.log('Lead notification error:', err));
+  } catch (err) {}
+
+  setTimeout(() => {
+    closePdfGateModal();
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-file-pdf"></i> Access & View PDF';
+    }
+    openPdfModal(pdfUrl, docTitle);
+  }, 400);
+};
+
+window.openPdfModal = function (url, title) {
+  let modal = document.getElementById('pdfModal');
+  if (!modal) {
+    initPdfModal();
+    modal = document.getElementById('pdfModal');
+  }
+
+  const iframe = document.getElementById('pdfModalIframe');
+  const titleEl = document.getElementById('pdfModalTitle');
+  const downloadBtn = document.getElementById('pdfModalDownload');
+
+  if (iframe) iframe.src = url;
+  if (titleEl && title) titleEl.textContent = title;
+  if (downloadBtn) downloadBtn.href = url;
+
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+};
+
+window.closePdfModal = function () {
+  const modal = document.getElementById('pdfModal');
+  const iframe = document.getElementById('pdfModalIframe');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  if (iframe) {
+    iframe.src = '';
+  }
 };
 
 // Global Scroll Entrance Animator for Animated Sections (e.g. .anim-section-bento)
