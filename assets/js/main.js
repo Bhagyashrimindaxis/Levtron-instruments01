@@ -1133,6 +1133,10 @@ window.handleQuoteModalSubmit = function (e) {
   const email = document.getElementById('quoteEmail').value;
   const message = document.getElementById('quoteMessage') ? document.getElementById('quoteMessage').value : '';
 
+  // Save user registration in localStorage
+  localStorage.setItem('levtron_user_registered', 'true');
+  localStorage.setItem('levtron_lead_info', JSON.stringify({ name, company, phone, email }));
+
   const btn = document.getElementById('quoteSubmitBtn');
   const successMsg = document.getElementById('quoteSuccessMsg');
 
@@ -1296,7 +1300,7 @@ function initPdfModal() {
     });
   }
 
-  // Intercept all PDF link clicks to first open Customer Lead Form
+  // Intercept all PDF link clicks to preview on the same screen (bypass form if already registered)
   document.addEventListener('click', (e) => {
     const target = e.target.closest('a');
     if (!target) return;
@@ -1308,12 +1312,53 @@ function initPdfModal() {
     if (href.toLowerCase().endsWith('.pdf') || target.classList.contains('btn-pdf-viewer')) {
       e.preventDefault();
       const title = target.getAttribute('title') || target.textContent.trim() || 'Document Preview';
-      openPdfGateModal(href, title);
+      
+      const isRegistered = localStorage.getItem('levtron_user_registered') === 'true';
+      if (isRegistered) {
+        // Customer already filled form once -> directly open PDF on screen
+        openPdfModal(href, title);
+
+        // Silently log lead download
+        try {
+          const savedUser = JSON.parse(localStorage.getItem('levtron_lead_info') || '{}');
+          if (savedUser.email || savedUser.name) {
+            fetch('https://formsubmit.co/ajax/88cf2c5d72c37b46a01c8c24f6a4e5f5', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                _subject: `Returning Lead: Document Opened - ${title}`,
+                _template: 'table',
+                _captcha: 'false',
+                'Customer Name': savedUser.name || 'Returning User',
+                'Phone Number': savedUser.phone || 'N/A',
+                'Email Address': savedUser.email || 'N/A',
+                'Company Name': savedUser.company || 'N/A',
+                'Document Requested': title,
+                'Document URL': href,
+                'Source Page': window.location.href,
+                'Date & Time': new Date().toLocaleString()
+              })
+            }).catch(() => {});
+          }
+        } catch (err) {}
+      } else {
+        // First time user -> open customer info form
+        openPdfGateModal(href, title);
+      }
     }
   });
 }
 
 window.openPdfGateModal = function (url, title) {
+  // If already registered, directly open PDF
+  if (localStorage.getItem('levtron_user_registered') === 'true') {
+    openPdfModal(url, title);
+    return;
+  }
+
   window._targetPdfUrl = url;
   window._targetPdfTitle = title || 'Document';
 
@@ -1352,6 +1397,10 @@ window.handlePdfGateSubmit = function (e) {
   const docTitle = window._targetPdfTitle || 'Product Document';
   const pdfUrl = window._targetPdfUrl;
 
+  // Save registration in localStorage so customer is never asked again
+  localStorage.setItem('levtron_user_registered', 'true');
+  localStorage.setItem('levtron_lead_info', JSON.stringify({ name, company, phone, email }));
+
   const btn = document.getElementById('pdfGateSubmitBtn');
   if (btn) {
     btn.disabled = true;
@@ -1389,7 +1438,7 @@ window.handlePdfGateSubmit = function (e) {
       btn.innerHTML = '<i class="fas fa-file-pdf"></i> Access & View PDF';
     }
     openPdfModal(pdfUrl, docTitle);
-  }, 400);
+  }, 350);
 };
 
 window.openPdfModal = function (url, title) {
