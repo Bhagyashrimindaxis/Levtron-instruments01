@@ -1,0 +1,19 @@
+/* =========================================================================
+   LEVTRON INSTRUMENTS - HOME PAGE STYLESHEET (index.css)
+   ========================================================================= */
+
+/* Executive Hero Section Enhancements */
+.executive-hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Flagship Products Section Custom Styles */
+.products-carousel-section {
+  position: relative;
+}
+
+/* Review Section */
+.reviews-carousel-section {
+  position: relative;
+}
