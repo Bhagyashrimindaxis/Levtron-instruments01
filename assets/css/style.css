@@ -3864,7 +3864,40 @@ body.modal-open {
   }
 }
 
+/* Breadcrumbs & Product Banner Section Center Alignment */
+.breadcrumbs-section {
+  text-align: center !important;
+}
+
+.breadcrumbs-content {
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+}
+
+.breadcrumbs-content h1 {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+.breadcrumbs-content .link {
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
 /* Technical Specification Table & Responsive Wrapper */
+
 .table-responsive-wrapper {
   width: 100%;
   overflow-x: auto;
