@@ -43,10 +43,14 @@
         
         <!-- Products Dropdown (Exact Reference Style: Dark Navy, Cyan Accent, Clean Submenu) -->
         <div class="nav-dropdown" id="productsDropdown">
-          <a href="products.html" class="nav-item nav-dropdown-toggle" id="productsDropdownToggle">
-            <span>Products</span>
-            <i class="fas fa-chevron-down nav-dropdown-icon"></i>
-          </a>
+          <div class="nav-dropdown-toggle-row">
+            <a href="products.html" class="nav-item nav-products-direct-link">
+              <span>Products</span>
+            </a>
+            <button type="button" class="nav-dropdown-arrow-btn" id="productsDropdownToggle" aria-label="Toggle Products Menu">
+              <i class="fas fa-chevron-down nav-dropdown-icon"></i>
+            </button>
+          </div>
 
           <!-- Main Dropdown Menu (Left Panel) -->
           <div class="nav-dropdown-menu" id="productsMenu">

@@ -63,14 +63,13 @@ function initNavEvents() {
     });
   }
 
-  // Dropdown Toggle (for mobile / touch)
+  // Dropdown Toggle (for mobile / touch) - Arrow button opens dropdown
   if (productsDropdownToggle && productsDropdown) {
     productsDropdownToggle.addEventListener('click', function (e) {
-      if (window.innerWidth <= 992) {
-        e.preventDefault();
-        productsDropdown.classList.toggle('open');
-        productsDropdown.classList.toggle('active');
-      }
+      e.preventDefault();
+      e.stopPropagation();
+      productsDropdown.classList.toggle('open');
+      productsDropdown.classList.toggle('active');
     });
   }
 
