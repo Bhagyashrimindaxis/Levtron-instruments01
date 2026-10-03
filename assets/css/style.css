@@ -269,7 +269,7 @@ img {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: brightness(0.6) contrast(1.1);
+  filter: brightness(0.92) contrast(1.05);
   transform: scale(1.04);
   transition: transform 0.6s ease;
 }
@@ -280,9 +280,20 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(10, 11, 14, 0.72) 0%, rgba(10, 11, 14, 0.8) 50%, rgba(10, 11, 14, 0.92) 100%);
+  background: linear-gradient(180deg, rgba(10, 15, 28, 0.42) 0%, rgba(10, 15, 28, 0.48) 50%, rgba(10, 15, 28, 0.64) 100%);
   z-index: 1;
   pointer-events: none;
+}
+
+.page-title-banner .section-title h2,
+.page-title-banner .banner-title h2,
+.page-title-banner h1,
+.page-title-banner h2 {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+}
+
+.page-title-banner p {
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
 }
 
 .banner-breadcrumb {
@@ -294,6 +305,7 @@ img {
   font-size: 0.98rem;
   font-weight: 600;
   color: #ffffff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
 }
 
 .banner-breadcrumb a {
