@@ -1690,8 +1690,8 @@ function initProductTabsMarquee() {
 
 // Global Product Detail Tabs Switcher with Synchronized Active State Across Loops
 window.switchProductTab = function (evt, tabId) {
-  if (evt) {
-    if (evt.preventDefault) evt.preventDefault();
+  if (evt && evt.preventDefault) {
+    evt.preventDefault();
   }
 
   const tabPanes = document.getElementsByClassName("product-tab-pane");
@@ -1710,7 +1710,12 @@ window.switchProductTab = function (evt, tabId) {
   const allTabBtns = document.querySelectorAll(".product-tab-btn");
   allTabBtns.forEach(btn => {
     const clickAttr = btn.getAttribute("onclick") || "";
-    if (clickAttr.includes(tabId)) {
+    const btnText = btn.textContent.toLowerCase();
+    if (clickAttr.includes(tabId) ||
+        (tabId === 'tabApplications' && btnText.includes('application')) ||
+        (tabId === 'tabFeatures' && btnText.includes('feature')) ||
+        (tabId === 'tabPrinciple' && btnText.includes('principle')) ||
+        (tabId === 'tabSpecs' && (btnText.includes('spec') || btnText.includes('technical')))) {
       btn.classList.add("active");
     } else {
       btn.classList.remove("active");
@@ -1718,9 +1723,32 @@ window.switchProductTab = function (evt, tabId) {
   });
 };
 
+// Global Delegated Click Handler for Product Tabs (Works on both Original & Cloned Looping Tabs)
+document.addEventListener('click', function (e) {
+  const tabBtn = e.target.closest('.product-tab-btn');
+  if (!tabBtn) return;
+
+  const clickAttr = tabBtn.getAttribute('onclick') || '';
+  const match = clickAttr.match(/switchProductTab\s*\(\s*event\s*,\s*['"]([^'"]+)['"]\s*\)/i);
+  let tabId = match ? match[1] : '';
+
+  if (!tabId) {
+    const text = tabBtn.textContent.toLowerCase();
+    if (text.includes('application')) tabId = 'tabApplications';
+    else if (text.includes('feature')) tabId = 'tabFeatures';
+    else if (text.includes('principle')) tabId = 'tabPrinciple';
+    else if (text.includes('spec') || text.includes('technical')) tabId = 'tabSpecs';
+  }
+
+  if (tabId) {
+    window.switchProductTab(e, tabId);
+  }
+}, true);
+
 // Also trigger tab marquee init on DOMContentLoaded or immediate execution
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initProductTabsMarquee);
 } else {
   initProductTabsMarquee();
 }
+
