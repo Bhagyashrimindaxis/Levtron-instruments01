@@ -1275,12 +1275,12 @@ function initPdfModal() {
               <span id="pdfModalTitle">Document Viewer</span>
             </h3>
             <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <a href="#" id="pdfModalOpenTab" target="_blank" class="quote-modal-close-btn" style="text-decoration: none; font-size: 0.85rem;" title="Open in New Tab"><i class="fas fa-external-link-alt"></i></a>
               <a href="#" id="pdfModalDownload" download class="quote-modal-close-btn" style="text-decoration: none; font-size: 0.85rem;" title="Download PDF"><i class="fas fa-download"></i></a>
               <button class="quote-modal-close-btn" onclick="closePdfModal()" aria-label="Close Viewer"><i class="fas fa-times"></i></button>
             </div>
           </div>
-          <div style="flex-grow: 1; width: 100%; height: calc(100% - 55px); background: #f8fafc; position: relative;">
-            <iframe id="pdfModalIframe" src="" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+          <div id="pdfModalContainer" style="flex-grow: 1; width: 100%; height: calc(100% - 55px); background: #f8fafc; position: relative;">
           </div>
         </div>
       </div>
@@ -1308,7 +1308,7 @@ function initPdfModal() {
     if (!target) return;
 
     // Do not intercept the modal's own download button or close buttons or items inside modals
-    if (target.id === 'pdfModalDownload' || target.closest('#pdfModal') || target.closest('#pdfGateModal') || target.closest('#quoteModal') || target.closest('#blogModal')) return;
+    if (target.id === 'pdfModalDownload' || target.id === 'pdfModalOpenTab' || target.closest('#pdfModal') || target.closest('#pdfGateModal') || target.closest('#quoteModal') || target.closest('#blogModal')) return;
 
     const href = target.getAttribute('href') || '';
     const title = target.getAttribute('title') || '';
@@ -1480,22 +1480,32 @@ window.openPdfModal = function (url, title) {
     modal = document.getElementById('pdfModal');
   }
 
-  const iframe = document.getElementById('pdfModalIframe');
+  const container = document.getElementById('pdfModalContainer');
   const titleEl = document.getElementById('pdfModalTitle');
   const downloadBtn = document.getElementById('pdfModalDownload');
+  const openTabBtn = document.getElementById('pdfModalOpenTab');
 
   if (titleEl && title) titleEl.textContent = title;
 
   if (url && url !== '#' && url.trim() !== '') {
-    if (iframe) iframe.src = url;
     if (downloadBtn) {
       downloadBtn.href = url;
       downloadBtn.style.display = 'inline-flex';
     }
+    if (openTabBtn) {
+      openTabBtn.href = url;
+      openTabBtn.style.display = 'inline-flex';
+    }
+    if (container) {
+      container.innerHTML = `
+        <iframe id="pdfModalIframe" src="${url}#toolbar=1&navpanes=0&view=FitH" style="width: 100%; height: 100%; border: none; display: block; background: #ffffff;" allow="fullscreen"></iframe>
+      `;
+    }
   } else {
-    // If specific PDF file is being prepared
-    if (iframe) {
-      iframe.srcdoc = `
+    if (downloadBtn) downloadBtn.style.display = 'none';
+    if (openTabBtn) openTabBtn.style.display = 'none';
+    if (container) {
+      container.innerHTML = `
         <div style="font-family: system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 80vh; text-align: center; color: #1e293b; padding: 2rem;">
           <div style="font-size: 3rem; margin-bottom: 1rem; color: #2563eb;">📄</div>
           <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 700;">Document Request Registered</h2>
@@ -1505,7 +1515,6 @@ window.openPdfModal = function (url, title) {
         </div>
       `;
     }
-    if (downloadBtn) downloadBtn.style.display = 'none';
   }
 
   if (modal) {
@@ -1516,14 +1525,13 @@ window.openPdfModal = function (url, title) {
 
 window.closePdfModal = function () {
   const modal = document.getElementById('pdfModal');
-  const iframe = document.getElementById('pdfModalIframe');
+  const container = document.getElementById('pdfModalContainer');
   if (modal) {
     modal.classList.remove('active');
     document.body.style.overflow = '';
   }
-  if (iframe) {
-    iframe.src = '';
-    iframe.srcdoc = '';
+  if (container) {
+    container.innerHTML = '';
   }
 };
 
