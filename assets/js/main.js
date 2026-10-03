@@ -1648,3 +1648,31 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.anim-section-bento').forEach(el => el.classList.add('in-view'));
   }
 });
+
+// Global Product Detail Tabs Switcher with Smooth Mobile Centering
+window.switchProductTab = function (evt, tabId) {
+  const tabPanes = document.getElementsByClassName("product-tab-pane");
+  for (let i = 0; i < tabPanes.length; i++) {
+    tabPanes[i].style.display = "none";
+    tabPanes[i].classList.remove("active");
+  }
+
+  const tabBtns = document.getElementsByClassName("product-tab-btn");
+  for (let i = 0; i < tabBtns.length; i++) {
+    tabBtns[i].classList.remove("active");
+  }
+
+  const activePane = document.getElementById(tabId);
+  if (activePane) {
+    activePane.style.display = "block";
+    activePane.classList.add("active");
+  }
+
+  if (evt && evt.currentTarget) {
+    evt.currentTarget.classList.add("active");
+    // Smoothly scroll clicked tab into view on mobile
+    try {
+      evt.currentTarget.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    } catch (e) {}
+  }
+};
