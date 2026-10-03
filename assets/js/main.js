@@ -1195,11 +1195,6 @@ window._targetPdfUrl = '';
 window._targetPdfTitle = '';
 
 function initPdfModal() {
-  // Clean up any stale bypass flags from previous sessions
-  try {
-    localStorage.removeItem('levtron_customer_unlocked');
-  } catch (err) {}
-
   // 1. PDF Gate Form Modal (Customer Form before viewing PDF)
   if (!document.getElementById('pdfGateModal')) {
     const gateModalHTML = `
@@ -1307,7 +1302,7 @@ function initPdfModal() {
     });
   }
 
-  // Intercept all Catalog, Manual & PDF link clicks to FIRST open Customer Lead Form
+  // Intercept all Catalog, Manual & PDF link clicks
   document.addEventListener('click', (e) => {
     const target = e.target.closest('a, button');
     if (!target) return;
@@ -1349,7 +1344,19 @@ function initPdfModal() {
         }
       }
       
-      openPdfGateModal(href, docTitle);
+      // Check if one common access status has already been granted in localStorage
+      let hasAccess = false;
+      try {
+        hasAccess = localStorage.getItem('pdfAccessGranted') === 'true';
+      } catch (err) {}
+
+      if (hasAccess) {
+        // Both Catalog and Manual PDFs of all products open directly without showing the form again
+        openPdfModal(href, docTitle);
+      } else {
+        // First click (Catalog or Manual) -> show the common customer form
+        openPdfGateModal(href, docTitle);
+      }
     }
   });
 }
@@ -1370,7 +1377,6 @@ window.openPdfGateModal = function (url, title) {
   const form = document.getElementById('pdfGateForm');
   if (form) {
     form.reset();
-    // Pre-fill previously entered customer details for convenience, but STILL require form submit
     try {
       const savedInfo = JSON.parse(localStorage.getItem('levtron_customer_info') || '{}');
       if (savedInfo.name && document.getElementById('pdfGateName')) document.getElementById('pdfGateName').value = savedInfo.name;
@@ -1396,10 +1402,12 @@ window.closePdfGateModal = function () {
 
 window.handlePdfGateSubmit = function (e) {
   e.preventDefault();
-  const name = document.getElementById('pdfGateName').value;
-  const company = document.getElementById('pdfGateCompany') ? document.getElementById('pdfGateCompany').value : '';
-  const phone = document.getElementById('pdfGatePhone').value;
-  const email = document.getElementById('pdfGateEmail').value;
+  if (window._isSubmittingPdfGate) return; // Prevent duplicate form submissions
+
+  const name = document.getElementById('pdfGateName') ? document.getElementById('pdfGateName').value.trim() : '';
+  const company = document.getElementById('pdfGateCompany') ? document.getElementById('pdfGateCompany').value.trim() : '';
+  const phone = document.getElementById('pdfGatePhone') ? document.getElementById('pdfGatePhone').value.trim() : '';
+  const email = document.getElementById('pdfGateEmail') ? document.getElementById('pdfGateEmail').value.trim() : '';
   const docTitle = window._targetPdfTitle || 'Product Document';
   const pdfUrl = window._targetPdfUrl;
 
@@ -1408,45 +1416,61 @@ window.handlePdfGateSubmit = function (e) {
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying & Loading...';
   }
-
-  // Save customer contact info for convenience
-  try {
-    localStorage.removeItem('levtron_customer_unlocked');
-    localStorage.setItem('levtron_customer_info', JSON.stringify({ name, email, phone, company }));
-  } catch (err) {}
+  window._isSubmittingPdfGate = true;
 
   // Send Lead Email to admin: bhagyashripatare07@gmail.com
-  try {
-    fetch('https://formsubmit.co/ajax/88cf2c5d72c37b46a01c8c24f6a4e5f5', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        _subject: `New Document Access Lead: ${docTitle}`,
-        _template: 'table',
-        _captcha: 'false',
-        'Customer Name': name,
-        'Phone Number': phone,
-        'Email Address': email,
-        'Company Name': company || 'N/A',
-        'Document Requested': docTitle,
-        'Document URL': pdfUrl,
-        'Source Page': window.location.href,
-        'Date & Time': new Date().toLocaleString()
-      })
-    }).catch(err => console.log('Lead notification error:', err));
-  } catch (err) {}
+  fetch('https://formsubmit.co/ajax/88cf2c5d72c37b46a01c8c24f6a4e5f5', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      _subject: `New Document Access Lead: ${docTitle}`,
+      _template: 'table',
+      _captcha: 'false',
+      'Customer Name': name,
+      'Phone Number': phone,
+      'Email Address': email,
+      'Company Name': company || 'N/A',
+      'Document Requested': docTitle,
+      'Document URL': pdfUrl,
+      'Source Page': window.location.href,
+      'Date & Time': new Date().toLocaleString()
+    })
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Form submission failed');
+    }
+    return response.json();
+  })
+  .then(() => {
+    // Save one common access status in localStorage
+    try {
+      localStorage.setItem('pdfAccessGranted', 'true');
+      localStorage.setItem('levtron_customer_info', JSON.stringify({ name, email, phone, company }));
+    } catch (err) {}
 
-  setTimeout(() => {
     closePdfGateModal();
     if (btn) {
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-file-pdf"></i> Access & View PDF';
     }
+    window._isSubmittingPdfGate = false;
+    // Open the exact PDF the customer clicked first
     openPdfModal(pdfUrl, docTitle);
-  }, 400);
+  })
+  .catch(err => {
+    console.error('Lead notification error:', err);
+    // If form/email submission fails, do not grant access
+    window._isSubmittingPdfGate = false;
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-file-pdf"></i> Access & View PDF';
+    }
+    alert('Submission could not be completed. Please check your internet connection and try again.');
+  });
 };
 
 window.openPdfModal = function (url, title) {
