@@ -1373,17 +1373,18 @@ function initPdfModal() {
         }
       }
       
-      // Check if one common access status has already been granted in localStorage
+      // Check if access status has been granted in current session (sessionStorage resets when website is re-opened)
       let hasAccess = false;
       try {
-        hasAccess = localStorage.getItem('pdfAccessGranted') === 'true';
+        localStorage.removeItem('pdfAccessGranted'); // Clear persistent storage so re-opening website always prompts form
+        hasAccess = sessionStorage.getItem('pdfAccessGranted') === 'true';
       } catch (err) {}
 
       if (hasAccess) {
-        // Both Catalog and Manual PDFs of all products open directly without showing the form again
+        // In the same session, PDFs open directly without repeating the form
         openPdfModal(href, docTitle);
       } else {
-        // First click (Catalog or Manual) -> show the common customer form
+        // Re-opened website or new session -> show the customer lead form again
         openPdfGateModal(href, docTitle);
       }
     }
@@ -1482,9 +1483,9 @@ window.handlePdfGateSubmit = function (e) {
     return response.json();
   })
   .then(() => {
-    // Save one common access status in localStorage
+    // Save session access status in sessionStorage (clears automatically when website is re-opened)
     try {
-      localStorage.setItem('pdfAccessGranted', 'true');
+      sessionStorage.setItem('pdfAccessGranted', 'true');
       localStorage.setItem('levtron_customer_info', JSON.stringify({ name, email, phone, company }));
     } catch (err) {}
 
