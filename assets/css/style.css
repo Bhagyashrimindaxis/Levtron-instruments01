@@ -7003,3 +7003,183 @@ border: 1px solid rgba(255, 255, 255, 0.2);
     margin-bottom: 1.25rem;
   }
 }
+
+/* ==========================================================================
+   COMPREHENSIVE MOBILE RESPONSIVENESS ENHANCEMENTS
+   ========================================================================== */
+
+/* 1. Global Viewport & Container Protection */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 2. Product Detail Showcase & Grid Responsiveness */
+@media (max-width: 992px) {
+  .product-top-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .shop-details-section {
+    padding: 2.5rem 0 3.5rem !important;
+  }
+
+  .shop-details-section .glass-card {
+    padding: 1.75rem 1.25rem !important;
+  }
+
+  .product-main-img {
+    max-height: 300px !important;
+  }
+
+  .product-tabs-wrapper {
+    margin-bottom: 2.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .shop-details-section h2,
+  .shop-details-content h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .product-action-ctas {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.75rem !important;
+    width: 100% !important;
+  }
+
+  .product-action-ctas .btn {
+    flex: 1 1 calc(50% - 0.5rem) !important;
+    min-width: 130px !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.92rem !important;
+  }
+
+  .product-action-ctas .btn.btn-primary {
+    flex: 1 1 100% !important;
+  }
+
+  .product-tabs-header {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    padding: 0.25rem 0 !important;
+  }
+
+  .product-tab-btn {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    padding: 0.75rem 1.1rem !important;
+    font-size: 0.88rem !important;
+  }
+
+  .product-tab-pane {
+    padding: 1.35rem 1rem !important;
+  }
+
+  .product-tab-pane table,
+  .specs-table,
+  .table-responsive table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    white-space: nowrap !important;
+  }
+
+  /* Catalog and Filter Search */
+  .catalog-filters {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    align-items: stretch !important;
+  }
+
+  .catalog-filters .search-box,
+  .catalog-filters .filter-group,
+  .catalog-filters input,
+  .catalog-filters select {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Modals */
+  .modal-box,
+  .quote-modal-box {
+    width: 94vw !important;
+    max-width: 94vw !important;
+    padding: 1.25rem 1rem !important;
+    border-radius: 12px !important;
+    max-height: 90vh !important;
+  }
+
+  .quote-modal-header-bar {
+    padding: 0.85rem 1rem !important;
+  }
+
+  .quote-modal-body {
+    padding: 1rem 0.5rem !important;
+  }
+
+  .quote-form-row-2 {
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .product-card,
+  .glass-card.product-card {
+    padding: 1rem !important;
+  }
+
+  .product-img-holder {
+    height: 180px !important;
+    padding: 10px !important;
+  }
+
+  .product-meta {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0.5rem !important;
+  }
+
+  .product-meta .btn {
+    font-size: 0.82rem !important;
+    padding: 0.55rem 0.65rem !important;
+  }
+
+  .product-action-ctas .btn {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+  }
+
+  .shop-details-section .glass-card {
+    padding: 1.25rem 0.85rem !important;
+  }
+
+  .breadcrumbs-section {
+    padding: 2.5rem 0 1.5rem !important;
+  }
+
+  .breadcrumbs-content h1 {
+    font-size: 1.65rem !important;
+  }
+}
