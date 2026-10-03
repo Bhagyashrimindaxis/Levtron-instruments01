@@ -247,14 +247,42 @@ function initPageScripts() {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Request...';
       }
 
-      setTimeout(() => {
+      const name = contactForm.querySelector('#contactName') ? contactForm.querySelector('#contactName').value : '';
+      const email = contactForm.querySelector('#contactEmail') ? contactForm.querySelector('#contactEmail').value : '';
+      const phone = contactForm.querySelector('#contactPhone') ? contactForm.querySelector('#contactPhone').value : '';
+      const company = contactForm.querySelector('#contactCompany') ? contactForm.querySelector('#contactCompany').value : '';
+      const message = contactForm.querySelector('#contactMessage') ? contactForm.querySelector('#contactMessage').value : '';
+      const subject = contactForm.querySelector('#subject') ? contactForm.querySelector('#subject').value : 'General Contact Inquiry';
+
+      // Send Inquiry Email to admin: info@levtron.in / sales@levtron.in
+      fetch('https://formsubmit.co/ajax/info@levtron.in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `New Contact Inquiry: ${subject}`,
+          _cc: 'sales@levtron.in',
+          _template: 'table',
+          _captcha: 'false',
+          'Customer Name': name,
+          'Phone Number': phone,
+          'Email Address': email,
+          'Company Name': company || 'N/A',
+          'Subject': subject,
+          'Message': message || 'N/A',
+          'Source Page': window.location.href,
+          'Date & Time': new Date().toLocaleString()
+        })
+      }).finally(() => {
         alert('Thank you for contacting Levtron Instruments! Our engineering team will reach out to you within 24 hours.');
         contactForm.reset();
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
         }
-      }, 1000);
+      });
     });
   }
 
@@ -1147,9 +1175,9 @@ window.handleQuoteModalSubmit = function (e) {
     localStorage.setItem('levtron_customer_info', JSON.stringify({ name, email, phone, company }));
   } catch (err) {}
 
-  // Send Lead Email to admin: bhagyashripatare07@gmail.com
+  // Send Lead Email to admin: info@levtron.in / sales@levtron.in
   try {
-    fetch('https://formsubmit.co/ajax/88cf2c5d72c37b46a01c8c24f6a4e5f5', {
+    fetch('https://formsubmit.co/ajax/info@levtron.in', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -1157,6 +1185,7 @@ window.handleQuoteModalSubmit = function (e) {
       },
       body: JSON.stringify({
         _subject: `New Industrial Quote Request: ${product}`,
+        _cc: 'sales@levtron.in',
         _template: 'table',
         _captcha: 'false',
         'Customer Name': name,
@@ -1424,8 +1453,8 @@ window.handlePdfGateSubmit = function (e) {
   }
   window._isSubmittingPdfGate = true;
 
-  // Send Lead Email to admin: bhagyashripatare07@gmail.com
-  fetch('https://formsubmit.co/ajax/88cf2c5d72c37b46a01c8c24f6a4e5f5', {
+  // Send Lead Email to admin: info@levtron.in / sales@levtron.in
+  fetch('https://formsubmit.co/ajax/info@levtron.in', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -1433,6 +1462,7 @@ window.handlePdfGateSubmit = function (e) {
     },
     body: JSON.stringify({
       _subject: `New Document Access Lead: ${docTitle}`,
+      _cc: 'sales@levtron.in',
       _template: 'table',
       _captcha: 'false',
       'Customer Name': name,
