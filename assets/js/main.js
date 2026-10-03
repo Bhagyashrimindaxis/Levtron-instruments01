@@ -1478,6 +1478,77 @@ window.handlePdfGateSubmit = function (e) {
   });
 };
 
+// Dynamic PDF.js Loader for 100% Flawless Mobile Touch Scrolling
+function loadPdfJsLib() {
+  return new Promise((resolve) => {
+    if (window.pdfjsLib) return resolve(window.pdfjsLib);
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    script.onload = () => {
+      if (window.pdfjsLib) {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      }
+      resolve(window.pdfjsLib);
+    };
+    script.onerror = () => resolve(null);
+    document.head.appendChild(script);
+  });
+}
+
+async function renderPdfContent(url, container) {
+  container.innerHTML = `
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 250px; color: #2563eb; font-family: system-ui, sans-serif;">
+      <i class="fas fa-spinner fa-spin" style="font-size: 2.2rem; margin-bottom: 0.75rem;"></i>
+      <span style="font-size: 0.95rem; font-weight: 600; color: #475569;">Loading Document...</span>
+    </div>
+  `;
+
+  const pdfjs = await loadPdfJsLib();
+  if (!pdfjs) {
+    container.innerHTML = `<iframe id="pdfModalIframe" src="${url}#toolbar=1&navpanes=0&view=FitH" style="width: 100%; height: 100%; border: none; display: block; background: #ffffff;" allow="fullscreen"></iframe>`;
+    return;
+  }
+
+  try {
+    const loadingTask = pdfjs.getDocument(url);
+    const pdf = await loadingTask.promise;
+
+    container.innerHTML = '';
+    const scrollWrapper = document.createElement('div');
+    scrollWrapper.className = 'pdf-canvas-scroll-wrapper';
+    scrollWrapper.style.cssText = 'width: 100%; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 12px 6px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 14px; background: #334155; touch-action: pan-y; overscroll-behavior: contain;';
+
+    const containerWidth = container.clientWidth || (window.innerWidth * 0.92);
+
+    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+      const page = await pdf.getPage(pageNum);
+      const unscaledViewport = page.getViewport({ scale: 1 });
+      const targetWidth = Math.min(containerWidth - 16, 850);
+      const scale = targetWidth / unscaledViewport.width;
+      const viewport = page.getViewport({ scale: scale * (window.devicePixelRatio > 1 ? 1.5 : 1.2) });
+
+      const canvas = document.createElement('canvas');
+      canvas.className = 'pdf-rendered-page';
+      canvas.style.cssText = `width: 100%; max-width: ${targetWidth}px; height: auto; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.35); background: #ffffff; display: block; margin: 0 auto;`;
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      const renderContext = {
+        canvasContext: canvas.getContext('2d'),
+        viewport: viewport
+      };
+
+      await page.render(renderContext).promise;
+      scrollWrapper.appendChild(canvas);
+    }
+
+    container.appendChild(scrollWrapper);
+  } catch (err) {
+    console.warn('PDF.js rendering fallback:', err);
+    container.innerHTML = `<iframe id="pdfModalIframe" src="${url}#toolbar=1&navpanes=0&view=FitH" style="width: 100%; height: 100%; border: none; display: block; background: #ffffff;" allow="fullscreen"></iframe>`;
+  }
+}
+
 window.openPdfModal = function (url, title) {
   let modal = document.getElementById('pdfModal');
   if (!modal) {
@@ -1502,9 +1573,7 @@ window.openPdfModal = function (url, title) {
       openTabBtn.style.display = 'inline-flex';
     }
     if (container) {
-      container.innerHTML = `
-        <iframe id="pdfModalIframe" src="${url}#toolbar=1&navpanes=0&view=FitH" style="width: 100%; height: 100%; border: none; display: block; background: #ffffff;" allow="fullscreen"></iframe>
-      `;
+      renderPdfContent(url, container);
     }
   } else {
     if (downloadBtn) downloadBtn.style.display = 'none';
