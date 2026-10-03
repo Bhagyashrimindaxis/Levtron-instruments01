@@ -122,7 +122,7 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-light);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   background-image: none;
 }
 
@@ -430,13 +430,16 @@ img {
   font-size: 0.875rem;
 }
 
-/* Header & Navigation Bar */
+/* Header & Navigation Bar (Always Sticky Topbar and Navbar on Scroll) */
 #header-placeholder,
-#site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
+#site-header,
+.site-header-sticky {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1050 !important;
+  width: 100% !important;
+  display: block !important;
 }
 
 .top-bar {
@@ -7011,7 +7014,7 @@ border: 1px solid rgba(255, 255, 255, 0.2);
 /* 1. Global Viewport & Container Protection */
 html, body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img {
