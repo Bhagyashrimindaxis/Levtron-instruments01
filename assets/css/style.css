@@ -2293,51 +2293,61 @@ img {
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  height: 260px;
+  height: 270px;
   cursor: pointer;
-  border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
 }
 
 .gallery-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: var(--transition-smooth);
+  object-fit: contain;
+  background: #ffffff;
+  padding: 12px;
+  transition: transform 0.35s ease;
+  filter: none !important;
+  -webkit-filter: none !important;
 }
 
 .gallery-overlay {
   position: absolute;
-  top: 0;
+  top: auto;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(10, 11, 14, 0.88);
+  background: linear-gradient(to top, rgba(10, 11, 14, 0.92) 0%, rgba(10, 11, 14, 0.65) 50%, transparent 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 1.5rem;
+  padding: 1.5rem 1rem 0.85rem;
   opacity: 0;
-  transition: var(--transition-smooth);
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
 }
 
 .gallery-item:hover img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .gallery-item:hover .gallery-overlay {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .gallery-overlay h4 {
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   color: #ffffff;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
 }
 
 .gallery-overlay p {
   color: #38bdf8;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  margin: 0;
 }
 
 /* Contact Form & Info */
@@ -5328,7 +5338,42 @@ textarea.form-control {
   }
 
   .gallery-item {
-    height: 200px;
+    height: 250px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+  }
+
+  .gallery-item img {
+    object-fit: contain;
+    padding: 10px;
+    background: #ffffff;
+    filter: none !important;
+    -webkit-filter: none !important;
+  }
+
+  .gallery-overlay {
+    opacity: 1;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    transform: translateY(0);
+    background: linear-gradient(to top, rgba(10, 11, 14, 0.92) 0%, rgba(10, 11, 14, 0.65) 50%, transparent 100%);
+    padding: 1.5rem 0.75rem 0.6rem;
+    pointer-events: auto;
+  }
+
+  .gallery-overlay h4 {
+    font-size: 0.92rem;
+    line-height: 1.25;
+    margin-bottom: 0.2rem;
+  }
+
+  .gallery-overlay p {
+    font-size: 0.75rem;
+    color: #38bdf8;
+    margin: 0;
   }
 
   .products-grid {
@@ -5402,17 +5447,25 @@ textarea.form-control {
 
   .gallery-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
   .gallery-item {
-    height: 220px;
+    height: 280px;
+    background: #ffffff;
   }
 
   .gallery-overlay {
     opacity: 1;
-    background: rgba(10, 11, 14, 0.88);
-    padding: 1rem;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    transform: translateY(0);
+    background: linear-gradient(to top, rgba(10, 11, 14, 0.92) 0%, rgba(10, 11, 14, 0.65) 50%, transparent 100%);
+    padding: 1.75rem 0.85rem 0.75rem;
+    pointer-events: auto;
   }
 
   .why-box-grid {
