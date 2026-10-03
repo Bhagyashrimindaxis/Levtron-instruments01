@@ -1387,6 +1387,9 @@ window.openPdfGateModal = function (url, title) {
 
   if (gateModal) {
     gateModal.classList.add('active');
+    document.documentElement.classList.add('modal-open');
+    document.body.classList.add('modal-open');
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
   }
 };
@@ -1395,6 +1398,9 @@ window.closePdfGateModal = function () {
   const gateModal = document.getElementById('pdfGateModal');
   if (gateModal) {
     gateModal.classList.remove('active');
+    document.documentElement.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
+    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
   }
 };
@@ -1518,6 +1524,9 @@ window.openPdfModal = function (url, title) {
 
   if (modal) {
     modal.classList.add('active');
+    document.documentElement.classList.add('modal-open');
+    document.body.classList.add('modal-open');
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
   }
 };
@@ -1527,6 +1536,9 @@ window.closePdfModal = function () {
   const container = document.getElementById('pdfModalContainer');
   if (modal) {
     modal.classList.remove('active');
+    document.documentElement.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
+    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
   }
   if (container) {
