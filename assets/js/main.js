@@ -187,7 +187,7 @@ function initPageScripts() {
       const matchesCategory = selectedCategory === 'all' || category === selectedCategory || category.split(/\s+/).includes(selectedCategory);
 
       if (matchesSearch && matchesCategory) {
-        card.style.display = 'block';
+        card.style.display = '';
       } else {
         card.style.display = 'none';
       }

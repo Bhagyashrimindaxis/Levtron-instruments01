@@ -2,15 +2,117 @@
    LEVTRON INSTRUMENTS - PRODUCTS CATALOG STYLESHEET (products.css)
    ========================================================================= */
 
-.product-filter-bar {
+.products-filter-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-bottom: 2.5rem;
+  align-items: center;
+  gap: 1rem;
 }
 
-.product-grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
+.products-filter-bar > div {
+  flex: 1 1 280px;
 }
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  align-items: stretch;
+}
+
+.product-card,
+.glass-card.product-card {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.25rem !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.product-card:hover,
+.glass-card.product-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-blue, #0284c7);
+  box-shadow: 0 16px 32px rgba(37, 99, 235, 0.12), 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+.product-img-holder {
+  height: 200px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: #ffffff !important;
+  margin-bottom: 1rem;
+  border: 1px solid #f1f5f9;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 12px !important;
+  text-align: center;
+}
+
+.product-img-holder a {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 auto !important;
+}
+
+.product-img-holder img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto;
+  height: auto;
+  margin: 0 auto !important;
+  display: block !important;
+  object-fit: contain !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover .product-img-holder img {
+  transform: scale(1.06);
+}
+
+/* Responsive Grid Fitting */
+@media (min-width: 1400px) {
+  .products-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.75rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .product-img-holder {
+    height: 180px;
+  }
+}
+
