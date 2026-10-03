@@ -6175,12 +6175,41 @@ body.modal-open {
     gap: 2.5rem;
   }
 
+  .ups-brand-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .ups-brand-title {
+    font-size: 1.45rem;
+    text-align: center;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+  }
+
+  .ups-brand-badge {
+    justify-content: center;
+    font-size: 0.88rem;
+  }
+
   .ups-form-card {
     padding: 2rem 1.5rem;
   }
 }
 
 @media (max-width: 600px) {
+  .ups-brand-title {
+    font-size: 1.32rem;
+  }
+
+  .ups-brand-badge {
+    font-size: 0.82rem;
+  }
+
   .ups-form-grid {
     grid-template-columns: 1fr;
   }
