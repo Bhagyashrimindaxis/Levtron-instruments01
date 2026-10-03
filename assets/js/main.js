@@ -184,7 +184,7 @@ function initPageScripts() {
       const text = card.textContent.toLowerCase();
 
       const matchesSearch = searchTerm === '' || title.includes(searchTerm) || text.includes(searchTerm);
-      const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+      const matchesCategory = selectedCategory === 'all' || category === selectedCategory || category.split(/\s+/).includes(selectedCategory);
 
       if (matchesSearch && matchesCategory) {
         card.style.display = 'block';
@@ -1141,9 +1141,9 @@ window.handleQuoteModalSubmit = function (e) {
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
   }
 
-  // Save customer unlock state in localStorage
+  // Save customer contact info for convenience
   try {
-    localStorage.setItem('levtron_customer_unlocked', 'true');
+    localStorage.removeItem('levtron_customer_unlocked');
     localStorage.setItem('levtron_customer_info', JSON.stringify({ name, email, phone, company }));
   } catch (err) {}
 
@@ -1195,6 +1195,11 @@ window._targetPdfUrl = '';
 window._targetPdfTitle = '';
 
 function initPdfModal() {
+  // Clean up any stale bypass flags from previous sessions
+  try {
+    localStorage.removeItem('levtron_customer_unlocked');
+  } catch (err) {}
+
   // 1. PDF Gate Form Modal (Customer Form before viewing PDF)
   if (!document.getElementById('pdfGateModal')) {
     const gateModalHTML = `
@@ -1302,34 +1307,54 @@ function initPdfModal() {
     });
   }
 
-  // Intercept all PDF link clicks to first open Customer Lead Form
+  // Intercept all Catalog, Manual & PDF link clicks to FIRST open Customer Lead Form
   document.addEventListener('click', (e) => {
-    const target = e.target.closest('a');
+    const target = e.target.closest('a, button');
     if (!target) return;
 
-    // Do not intercept the modal's own download button
-    if (target.id === 'pdfModalDownload') return;
+    // Do not intercept the modal's own download button or close buttons or items inside modals
+    if (target.id === 'pdfModalDownload' || target.closest('#pdfModal') || target.closest('#pdfGateModal') || target.closest('#quoteModal') || target.closest('#blogModal')) return;
 
     const href = target.getAttribute('href') || '';
-    if (href.toLowerCase().endsWith('.pdf') || target.classList.contains('btn-pdf-viewer')) {
+    const title = target.getAttribute('title') || '';
+    const text = (target.textContent || '').trim();
+
+    // Avoid navigation header links to products page
+    if (href === 'products.html' || href.startsWith('products.html?') || target.id === 'productsDropdownToggle' || target.classList.contains('nav-menu-link') || target.classList.contains('nav-link')) return;
+
+    const isPdfHref = href.toLowerCase().includes('.pdf');
+    const isDocClass = target.classList.contains('btn-pdf-viewer');
+    const isDocText = /\b(catalog|manual|user manual|datasheet|brochure|catlog)\b/i.test(text) || 
+                      /\b(catalog|manual|user manual|datasheet|brochure|catlog)\b/i.test(title);
+
+    // If it's a PDF link or a button specifically for Catalog / Manual
+    if (isPdfHref || isDocClass || (isDocText && !href.includes('contact.html') && !href.includes('about.html') && !href.includes('blog.html'))) {
       e.preventDefault();
-      const title = target.getAttribute('title') || target.textContent.trim() || 'Document Preview';
-      openPdfGateModal(href, title);
+      
+      let docTitle = title || text || 'Product Document';
+      // If docTitle is generic like "Catalog" or "Manual", attach the product name
+      if (/^(catalog|manual|catlog|download catalog|user manual|view document)$/i.test(docTitle.trim())) {
+        const pageH2 = document.querySelector('.shop-details-section h2');
+        const pageH1 = document.querySelector('.breadcrumbs-content h1');
+        const card = target.closest('.product-card, .product-card-slide, .product-card-item');
+        const cardTitle = card ? card.querySelector('h3, h2, [data-title]') : null;
+        
+        let pName = '';
+        if (cardTitle) pName = cardTitle.textContent.trim();
+        else if (pageH2) pName = pageH2.textContent.trim();
+        else if (pageH1) pName = pageH1.textContent.trim();
+
+        if (pName) {
+          docTitle = `${pName} - ${docTitle.trim()}`;
+        }
+      }
+      
+      openPdfGateModal(href, docTitle);
     }
   });
 }
 
 window.openPdfGateModal = function (url, title) {
-  // Check if customer already filled form once (Persistent Unlock)
-  try {
-    const isUnlocked = localStorage.getItem('levtron_customer_unlocked') === 'true';
-    if (isUnlocked) {
-      // Directly open the PDF modal without opening the form again
-      openPdfModal(url, title);
-      return;
-    }
-  } catch (err) {}
-
   window._targetPdfUrl = url;
   window._targetPdfTitle = title || 'Document';
 
@@ -1343,7 +1368,17 @@ window.openPdfGateModal = function (url, title) {
   if (docNameEl) docNameEl.textContent = window._targetPdfTitle;
 
   const form = document.getElementById('pdfGateForm');
-  if (form) form.reset();
+  if (form) {
+    form.reset();
+    // Pre-fill previously entered customer details for convenience, but STILL require form submit
+    try {
+      const savedInfo = JSON.parse(localStorage.getItem('levtron_customer_info') || '{}');
+      if (savedInfo.name && document.getElementById('pdfGateName')) document.getElementById('pdfGateName').value = savedInfo.name;
+      if (savedInfo.company && document.getElementById('pdfGateCompany')) document.getElementById('pdfGateCompany').value = savedInfo.company;
+      if (savedInfo.phone && document.getElementById('pdfGatePhone')) document.getElementById('pdfGatePhone').value = savedInfo.phone;
+      if (savedInfo.email && document.getElementById('pdfGateEmail')) document.getElementById('pdfGateEmail').value = savedInfo.email;
+    } catch (e) {}
+  }
 
   if (gateModal) {
     gateModal.classList.add('active');
@@ -1371,12 +1406,12 @@ window.handlePdfGateSubmit = function (e) {
   const btn = document.getElementById('pdfGateSubmitBtn');
   if (btn) {
     btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying & Loading...';
   }
 
-  // Save customer unlock state in localStorage so they never have to fill it again
+  // Save customer contact info for convenience
   try {
-    localStorage.setItem('levtron_customer_unlocked', 'true');
+    localStorage.removeItem('levtron_customer_unlocked');
     localStorage.setItem('levtron_customer_info', JSON.stringify({ name, email, phone, company }));
   } catch (err) {}
 
@@ -1425,9 +1460,29 @@ window.openPdfModal = function (url, title) {
   const titleEl = document.getElementById('pdfModalTitle');
   const downloadBtn = document.getElementById('pdfModalDownload');
 
-  if (iframe) iframe.src = url;
   if (titleEl && title) titleEl.textContent = title;
-  if (downloadBtn) downloadBtn.href = url;
+
+  if (url && url !== '#' && url.trim() !== '') {
+    if (iframe) iframe.src = url;
+    if (downloadBtn) {
+      downloadBtn.href = url;
+      downloadBtn.style.display = 'inline-flex';
+    }
+  } else {
+    // If specific PDF file is being prepared
+    if (iframe) {
+      iframe.srcdoc = `
+        <div style="font-family: system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 80vh; text-align: center; color: #1e293b; padding: 2rem;">
+          <div style="font-size: 3rem; margin-bottom: 1rem; color: #2563eb;">📄</div>
+          <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 700;">Document Request Registered</h2>
+          <p style="color: #64748b; max-width: 500px; line-height: 1.6; margin-bottom: 1.5rem;">
+            Thank you! Your requested catalog & manual for <strong>${title}</strong> has been noted. Our engineering team is sending the comprehensive technical documentation directly to your email.
+          </p>
+        </div>
+      `;
+    }
+    if (downloadBtn) downloadBtn.style.display = 'none';
+  }
 
   if (modal) {
     modal.classList.add('active');
@@ -1444,6 +1499,7 @@ window.closePdfModal = function () {
   }
   if (iframe) {
     iframe.src = '';
+    iframe.srcdoc = '';
   }
 };
 

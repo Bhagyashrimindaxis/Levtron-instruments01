@@ -1300,17 +1300,27 @@ img {
 }
 
 .product-img-holder {
-  height: 190px;
+  height: 200px;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
   background: #ffffff !important;
   margin-bottom: 1rem;
   border: 1px solid #f1f5f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px 12px 10px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 14px !important;
+  text-align: center;
+}
+
+.product-img-holder a {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 auto !important;
 }
 
 .product-img-holder img {
@@ -1318,6 +1328,8 @@ img {
   max-height: 100%;
   width: auto;
   height: auto;
+  margin: 0 auto !important;
+  display: block !important;
   object-fit: contain !important;
   transition: var(--transition-smooth);
 }
@@ -1529,16 +1541,19 @@ img {
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 16px 36px rgba(10, 11, 14, 0.1), 0 4px 12px rgba(0, 0, 0, 0.04);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
 /* Subtle continuous ambient float */
 @keyframes aboutImageFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-8px);
   }
@@ -1576,12 +1591,10 @@ img {
   left: -120%;
   width: 80%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
   transform: skewX(-25deg);
   pointer-events: none;
   transition: left 0.85s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1596,9 +1609,9 @@ img {
 .about-grid-responsive .about-image-wrapper {
   opacity: 0;
   transform: translateX(-40px);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.5s ease;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s ease;
 }
 
 .about-grid-responsive .about-image-wrapper.revealed {
@@ -1607,49 +1620,50 @@ img {
 }
 
 /* 3. Staggered Text Animations */
-.about-grid-responsive > div:last-child {
+.about-grid-responsive>div:last-child {
   opacity: 1 !important;
-  transform: none !important; /* override the generic full-block fade */
+  transform: none !important;
+  /* override the generic full-block fade */
 }
 
 /* Initial state for text elements */
-.about-grid-responsive > div:last-child .section-title .subtitle,
-.about-grid-responsive > div:last-child .section-title h2,
-.about-grid-responsive > div:last-child p,
-.about-grid-responsive > div:last-child .btn {
+.about-grid-responsive>div:last-child .section-title .subtitle,
+.about-grid-responsive>div:last-child .section-title h2,
+.about-grid-responsive>div:last-child p,
+.about-grid-responsive>div:last-child .btn {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 /* Staggered entrance when text container gets .revealed */
-.about-grid-responsive > div:last-child.revealed .section-title .subtitle {
+.about-grid-responsive>div:last-child.revealed .section-title .subtitle {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.1s;
 }
 
-.about-grid-responsive > div:last-child.revealed .section-title h2 {
+.about-grid-responsive>div:last-child.revealed .section-title h2 {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.25s;
 }
 
-.about-grid-responsive > div:last-child.revealed p:first-of-type {
+.about-grid-responsive>div:last-child.revealed p:first-of-type {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.4s;
 }
 
-.about-grid-responsive > div:last-child.revealed p:nth-of-type(2) {
+.about-grid-responsive>div:last-child.revealed p:nth-of-type(2) {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.55s;
 }
 
-.about-grid-responsive > div:last-child.revealed .btn {
+.about-grid-responsive>div:last-child.revealed .btn {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.7s;
@@ -1675,11 +1689,14 @@ img {
 }
 
 @keyframes aboutDotPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(0.9);
     opacity: 0.7;
     box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
   }
+
   50% {
     transform: scale(1.2);
     opacity: 1;
@@ -1711,7 +1728,7 @@ img {
   transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s;
 }
 
-.about-grid-responsive > div:last-child.revealed .section-title h2::after {
+.about-grid-responsive>div:last-child.revealed .section-title h2::after {
   width: 60px;
 }
 
@@ -1746,10 +1763,10 @@ img {
 
 /* 8. Button Hover Lift & Arrow Slide Animation */
 .about-grid-responsive .btn {
-  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1), 
-              background-color 0.3s ease, 
-              color 0.3s ease;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .about-grid-responsive .btn:hover {
@@ -3652,7 +3669,7 @@ textarea.form-control {
 }
 
 /* Product Showcase Image Card Centering */
-.product-top-grid > div:first-child {
+.product-top-grid>div:first-child {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -3689,7 +3706,7 @@ textarea.form-control {
 
 /* Product Showcase Action CTAs Centering */
 .product-action-ctas,
-.product-top-grid > div:last-child > div:last-child {
+.product-top-grid>div:last-child>div:last-child {
   display: flex !important;
   flex-wrap: wrap !important;
   justify-content: center !important;
@@ -5965,10 +5982,12 @@ textarea.form-control {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
   }
+
   70% {
     transform: scale(1.1);
     box-shadow: 0 0 0 8px rgba(56, 189, 248, 0);
   }
+
   100% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
@@ -6111,8 +6130,9 @@ textarea.form-control {
   text-decoration: none;
   box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.35);
 }
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+
+transition: all 0.3s ease;
+border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn-services-primary:hover {
@@ -6213,30 +6233,57 @@ textarea.form-control {
 .anim-section-banner .banner-title {
   animation: bannerDropFocus 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
 @keyframes bannerDropFocus {
-  0% { opacity: 0; transform: translateY(-32px) scale(0.95); filter: blur(6px); }
-  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(-32px) scale(0.95);
+    filter: blur(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
+
 .anim-section-banner .banner-bg-item:nth-child(odd) {
   animation: bannerFloatOdd 6.5s ease-in-out infinite alternate;
 }
+
 .anim-section-banner .banner-bg-item:nth-child(even) {
   animation: bannerFloatEven 8s ease-in-out infinite alternate;
 }
+
 @keyframes bannerFloatOdd {
-  0% { transform: translateY(0) scale(1); }
-  100% { transform: translateY(-16px) scale(1.05); }
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    transform: translateY(-16px) scale(1.05);
+  }
 }
+
 @keyframes bannerFloatEven {
-  0% { transform: translateY(0) scale(1); }
-  100% { transform: translateY(14px) scale(1.04); }
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    transform: translateY(14px) scale(1.04);
+  }
 }
+
 .anim-section-banner .wave-layer-back {
   animation: waveMoveBack 16s ease-in-out infinite;
 }
+
 .anim-section-banner .wave-layer-middle {
   animation: waveMoveMiddle 11s ease-in-out infinite;
 }
+
 .anim-section-banner .wave-layer-front {
   animation: waveMoveFront 8s ease-in-out infinite;
 }
@@ -6249,48 +6296,69 @@ textarea.form-control {
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;
   will-change: transform, opacity;
 }
+
 .anim-section-overview.in-view .about-image-wrapper {
   opacity: 1;
   transform: perspective(1000px) rotateY(0deg) translateX(0) scale(1);
   filter: blur(0);
 }
+
 .anim-section-overview.in-view .about-image-wrapper img {
   animation: imageBreathingPulse 6s ease-in-out infinite alternate;
 }
+
 @keyframes imageBreathingPulse {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.025); }
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.025);
+  }
 }
-.anim-section-overview .about-text-content > * {
+
+.anim-section-overview .about-text-content>* {
   opacity: 0;
   transform: translateX(45px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
+
 .anim-section-overview.in-view .about-text-content .section-title {
   opacity: 1;
   transform: translateX(0);
   transition-delay: 0.15s;
 }
+
 .anim-section-overview.in-view .about-text-content p:nth-of-type(1) {
   opacity: 1;
   transform: translateX(0);
   transition-delay: 0.3s;
 }
+
 .anim-section-overview.in-view .about-text-content p:nth-of-type(2) {
   opacity: 1;
   transform: translateX(0);
   transition-delay: 0.45s;
 }
+
 .anim-section-overview.in-view .about-text-content .btn {
   opacity: 1;
   transform: translateX(0);
   transition-delay: 0.6s;
   animation: btnPulseSheen 3.2s infinite ease-in-out 1.2s;
 }
+
 @keyframes btnPulseSheen {
-  0%, 100% { box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); }
-  50% { box-shadow: 0 8px 25px rgba(37, 99, 235, 0.45); }
+
+  0%,
+  100% {
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.45);
+  }
 }
 
 /* Section 3: Transparent Image Banner Counters (Compact / Sleek Design) */
@@ -6302,6 +6370,7 @@ textarea.form-control {
   box-shadow: 0 16px 40px -10px rgba(15, 23, 42, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.22);
 }
+
 .counter-banner-bg {
   position: absolute;
   inset: 0;
@@ -6311,9 +6380,11 @@ textarea.form-control {
   transform: scale(1.04);
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .levtron-counter-banner:hover .counter-banner-bg {
   transform: scale(1.08);
 }
+
 .counter-banner-overlay {
   position: absolute;
   inset: 0;
@@ -6321,6 +6392,7 @@ textarea.form-control {
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
+
 .counter-banner-grid {
   position: relative;
   z-index: 2;
@@ -6329,6 +6401,7 @@ textarea.form-control {
   padding: 1.5rem 1.25rem;
   align-items: center;
 }
+
 .counter-banner-col {
   display: flex;
   flex-direction: column;
@@ -6341,30 +6414,43 @@ textarea.form-control {
   transform: translateY(20px);
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .anim-section-stats.in-view .counter-banner-col:nth-child(1),
 .anim-section-stats.revealed .counter-banner-col:nth-child(1),
 .levtron-counter-banner.in-view .counter-banner-col:nth-child(1),
 .levtron-counter-banner.revealed .counter-banner-col:nth-child(1) {
-  opacity: 1; transform: translateY(0); transition-delay: 0.08s;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.08s;
 }
+
 .anim-section-stats.in-view .counter-banner-col:nth-child(2),
 .anim-section-stats.revealed .counter-banner-col:nth-child(2),
 .levtron-counter-banner.in-view .counter-banner-col:nth-child(2),
 .levtron-counter-banner.revealed .counter-banner-col:nth-child(2) {
-  opacity: 1; transform: translateY(0); transition-delay: 0.2s;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
 }
+
 .anim-section-stats.in-view .counter-banner-col:nth-child(3),
 .anim-section-stats.revealed .counter-banner-col:nth-child(3),
 .levtron-counter-banner.in-view .counter-banner-col:nth-child(3),
 .levtron-counter-banner.revealed .counter-banner-col:nth-child(3) {
-  opacity: 1; transform: translateY(0); transition-delay: 0.32s;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.32s;
 }
+
 .anim-section-stats.in-view .counter-banner-col:nth-child(4),
 .anim-section-stats.revealed .counter-banner-col:nth-child(4),
 .levtron-counter-banner.in-view .counter-banner-col:nth-child(4),
 .levtron-counter-banner.revealed .counter-banner-col:nth-child(4) {
-  opacity: 1; transform: translateY(0); transition-delay: 0.44s;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.44s;
 }
+
 .counter-banner-col:not(:last-child)::after {
   content: '';
   position: absolute;
@@ -6374,6 +6460,7 @@ textarea.form-control {
   width: 1px;
   background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.35) 20%, rgba(255, 255, 255, 0.35) 80%, transparent);
 }
+
 .counter-banner-icon {
   font-size: 1.6rem;
   color: #ffffff;
@@ -6382,9 +6469,11 @@ textarea.form-control {
   transition: transform 0.3s ease;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
+
 .counter-banner-col:hover .counter-banner-icon {
   transform: translateY(-3px) scale(1.08);
 }
+
 .counter-banner-col .stat-number {
   font-family: var(--font-heading);
   font-size: clamp(1.85rem, 2.3vw, 2.35rem);
@@ -6395,6 +6484,7 @@ textarea.form-control {
   letter-spacing: -0.4px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
+
 .counter-banner-col .stat-label {
   font-size: clamp(0.85rem, 1vw, 0.94rem);
   font-weight: 600;
@@ -6402,25 +6492,30 @@ textarea.form-control {
   letter-spacing: 0.2px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
+
 @media (max-width: 992px) {
   .counter-banner-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem 0;
     padding: 1.75rem 1.25rem;
   }
+
   .counter-banner-col:nth-child(2)::after {
     display: none;
   }
 }
+
 @media (max-width: 576px) {
   .counter-banner-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     padding: 1.5rem 1rem;
   }
+
   .counter-banner-col::after {
     display: none !important;
   }
+
   .counter-banner-col:not(:last-child) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     padding-bottom: 1rem;
@@ -6433,20 +6528,24 @@ textarea.form-control {
   transform: translateY(-24px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .anim-section-bento.in-view .section-title {
   opacity: 1;
   transform: translateY(0);
 }
+
 .anim-section-bento .levtron-bento-card:first-child {
   opacity: 0;
   transform: translate3d(-70px, 45px, 0) rotate(-2.5deg);
   transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.12s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.12s;
   will-change: transform, opacity;
 }
+
 .anim-section-bento.in-view .levtron-bento-card:first-child {
   opacity: 1;
   transform: translate3d(0, 0, 0) rotate(0deg);
 }
+
 .anim-section-bento .levtron-bento-img-card {
   opacity: 0;
   transform: scale(0.86);
@@ -6454,24 +6553,36 @@ textarea.form-control {
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s, filter 1s ease 0.25s;
   will-change: transform, opacity;
 }
+
 .anim-section-bento.in-view .levtron-bento-img-card {
   opacity: 1;
   transform: scale(1);
   filter: brightness(1);
 }
+
 .anim-section-bento.in-view .bento-floating-pill {
   animation: bentoPillHoverDrift 3.6s ease-in-out infinite;
 }
+
 @keyframes bentoPillHoverDrift {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
+
 .anim-section-bento .levtron-bento-card:last-child {
   opacity: 0;
   transform: translate3d(70px, 45px, 0) rotate(2.5deg);
   transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.38s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.38s;
   will-change: transform, opacity;
 }
+
 .anim-section-bento.in-view .levtron-bento-card:last-child {
   opacity: 1;
   transform: translate3d(0, 0, 0) rotate(0deg);
@@ -6483,41 +6594,58 @@ textarea.form-control {
   transform: translateY(45px);
   transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .anim-section-services.in-view {
   opacity: 1;
   transform: translateY(0);
 }
+
 .anim-section-services .pedestal-reticle {
   opacity: 0;
   transform: scale(2.4);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
 }
+
 .anim-section-services.in-view .pedestal-reticle {
   opacity: 0.8;
   transform: scale(1);
 }
+
 .anim-section-services.in-view .pedestal-img-frame img {
   animation: sensorLevitationFloat 5.2s ease-in-out infinite alternate;
 }
+
 @keyframes sensorLevitationFloat {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(0.4deg); }
-  100% { transform: translateY(2px) rotate(-0.3deg); }
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(0.4deg);
+  }
+
+  100% {
+    transform: translateY(2px) rotate(-0.3deg);
+  }
 }
+
 .anim-section-services .services-quote-card {
   opacity: 0;
   transform: translateX(45px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
 }
+
 .anim-section-services.in-view .services-quote-card {
   opacity: 1;
   transform: translateX(0);
 }
+
 .anim-section-services .services-action-row {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.55s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.55s;
 }
+
 .anim-section-services.in-view .services-action-row {
   opacity: 1;
   transform: translateY(0);
@@ -6529,46 +6657,69 @@ textarea.form-control {
   transform: translateY(-20px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .anim-section-mission.in-view .section-title {
   opacity: 1;
   transform: translateY(0);
 }
+
 .anim-section-mission .mission-poly-card {
   opacity: 0;
   transform: translateX(-85px) rotate(-3.5deg);
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.18s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.18s;
   will-change: transform, opacity;
 }
+
 .anim-section-mission.in-view .mission-poly-card {
   opacity: 1;
   transform: translateX(0) rotate(0deg);
 }
+
 .anim-section-mission .vision-poly-card {
   opacity: 0;
   transform: translateX(85px) rotate(3.5deg);
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.32s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.32s;
   will-change: transform, opacity;
 }
+
 .anim-section-mission.in-view .vision-poly-card {
   opacity: 1;
   transform: translateX(0) rotate(0deg);
 }
+
 .anim-section-mission .mv-poly-line {
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.45s;
 }
+
 .anim-section-mission.in-view .mv-poly-line {
   transform: scaleY(1);
 }
+
 .anim-section-mission .mv-poly-node {
   opacity: 0;
   transform: scale(0.35);
   transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.anim-section-mission.in-view .mv-poly-node:nth-child(2) { opacity: 1; transform: scale(1); transition-delay: 0.55s; }
-.anim-section-mission.in-view .mv-poly-node:nth-child(3) { opacity: 1; transform: scale(1); transition-delay: 0.75s; }
-.anim-section-mission.in-view .mv-poly-node:nth-child(4) { opacity: 1; transform: scale(1); transition-delay: 0.95s; }
+
+.anim-section-mission.in-view .mv-poly-node:nth-child(2) {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: 0.55s;
+}
+
+.anim-section-mission.in-view .mv-poly-node:nth-child(3) {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: 0.75s;
+}
+
+.anim-section-mission.in-view .mv-poly-node:nth-child(4) {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: 0.95s;
+}
 
 /* Section 7: Industries - 3D Flip Cascade & Icon Bounce Sway */
 .anim-section-industries {
@@ -6576,56 +6727,102 @@ textarea.form-control {
   transform: translateY(35px) scale(0.98);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .anim-section-industries.in-view {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+
 .anim-section-industries .industry-box {
   opacity: 0;
   transform: perspective(600px) rotateX(45deg) translateY(35px);
   transition: opacity 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 .anim-section-industries.in-view .industry-box:nth-child(1) {
-  opacity: 1; transform: perspective(600px) rotateX(0deg) translateY(0); transition-delay: 0.12s;
+  opacity: 1;
+  transform: perspective(600px) rotateX(0deg) translateY(0);
+  transition-delay: 0.12s;
 }
+
 .anim-section-industries.in-view .industry-box:nth-child(2) {
-  opacity: 1; transform: perspective(600px) rotateX(0deg) translateY(0); transition-delay: 0.24s;
+  opacity: 1;
+  transform: perspective(600px) rotateX(0deg) translateY(0);
+  transition-delay: 0.24s;
 }
+
 .anim-section-industries.in-view .industry-box:nth-child(3) {
-  opacity: 1; transform: perspective(600px) rotateX(0deg) translateY(0); transition-delay: 0.36s;
+  opacity: 1;
+  transform: perspective(600px) rotateX(0deg) translateY(0);
+  transition-delay: 0.36s;
 }
+
 .anim-section-industries.in-view .industry-box:nth-child(4) {
-  opacity: 1; transform: perspective(600px) rotateX(0deg) translateY(0); transition-delay: 0.48s;
+  opacity: 1;
+  transform: perspective(600px) rotateX(0deg) translateY(0);
+  transition-delay: 0.48s;
 }
+
 .anim-section-industries.in-view .industry-box:nth-child(1) i {
   animation: iconFlaskTilt 3.2s ease-in-out infinite alternate;
 }
+
 @keyframes iconFlaskTilt {
-  0% { transform: rotate(-8deg); }
-  100% { transform: rotate(8deg); }
+  0% {
+    transform: rotate(-8deg);
+  }
+
+  100% {
+    transform: rotate(8deg);
+  }
 }
+
 .anim-section-industries.in-view .industry-box:nth-child(2) i {
   animation: iconPillFloat 2.8s ease-in-out infinite alternate;
 }
+
 @keyframes iconPillFloat {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-6px); }
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-6px);
+  }
 }
+
 .anim-section-industries.in-view .industry-box:nth-child(3) i {
   animation: iconWheatSway 4s ease-in-out infinite alternate;
 }
+
 @keyframes iconWheatSway {
-  0% { transform: rotate(-6deg); }
-  100% { transform: rotate(6deg); }
+  0% {
+    transform: rotate(-6deg);
+  }
+
+  100% {
+    transform: rotate(6deg);
+  }
 }
+
 .anim-section-industries.in-view .industry-box:nth-child(4) i {
   animation: iconOilPump 2.2s ease-in-out infinite alternate;
 }
+
 @keyframes iconOilPump {
-  0% { transform: translateY(0) scaleY(1); }
-  50% { transform: translateY(-5px) scaleY(1.08); }
-  100% { transform: translateY(0) scaleY(1); }
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+
+  50% {
+    transform: translateY(-5px) scaleY(1.08);
+  }
+
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
 }
+
 .anim-section-industries .industry-box:hover {
   transform: translateY(-6px) scale(1.04) !important;
   border-color: #2563eb !important;
@@ -6664,10 +6861,10 @@ textarea.form-control {
   justify-content: center;
   text-decoration: none;
   box-shadow: 0 10px 25px rgba(10, 11, 14, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-              background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   min-height: 135px;
   z-index: 1;
 }
@@ -6770,6 +6967,7 @@ textarea.form-control {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
+
   .hero-feature-bar-section {
     margin-top: 1.75rem;
   }
@@ -6780,21 +6978,26 @@ textarea.form-control {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
   }
+
   .hero-feature-card {
     padding: 1.2rem 0.75rem;
     min-height: 110px;
   }
+
   .hero-feature-card:last-child:nth-child(odd) {
     grid-column: span 2;
   }
+
   .hero-feature-icon {
     font-size: 1.75rem;
     margin-bottom: 0.5rem;
     height: 34px;
   }
+
   .hero-feature-title {
     font-size: 0.85rem;
   }
+
   .hero-feature-bar-section {
     margin-top: 1.5rem;
     margin-bottom: 1.25rem;
