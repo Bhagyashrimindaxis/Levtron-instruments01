@@ -1476,7 +1476,7 @@ window.openPdfModal = function (url, title) {
           <div style="font-size: 3rem; margin-bottom: 1rem; color: #2563eb;">📄</div>
           <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 700;">Document Request Registered</h2>
           <p style="color: #64748b; max-width: 500px; line-height: 1.6; margin-bottom: 1.5rem;">
-            Thank you! Your requested catalog & manual for <strong>${title}</strong> has been noted. Our engineering team is sending the comprehensive technical documentation directly to your email.
+            Thank you! Your requested document for <strong>${title}</strong> has been noted.
           </p>
         </div>
       `;
