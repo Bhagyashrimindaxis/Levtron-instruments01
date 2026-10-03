@@ -137,6 +137,7 @@ function initApp() {
   initPageScripts();
   initQuoteModal();
   initPdfModal();
+  initProductTabsMarquee();
 }
 
 if (document.readyState === 'loading') {
@@ -1649,17 +1650,54 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// Global Product Detail Tabs Switcher with Smooth Mobile Centering
+// Product Detail Tabs Continuous Infinite Loop Marquee on Mobile
+function initProductTabsMarquee() {
+  const tabsHeaders = document.querySelectorAll('.product-tabs-header');
+  tabsHeaders.forEach(header => {
+    if (header.classList.contains('marquee-initialized')) return;
+
+    const originalButtons = Array.from(header.children).filter(el => el.classList.contains('product-tab-btn'));
+    if (originalButtons.length === 0) return;
+
+    header.classList.add('marquee-initialized');
+
+    const marqueeContainer = document.createElement('div');
+    marqueeContainer.className = 'product-tabs-marquee-container';
+
+    // Track 1 (Original buttons)
+    const track1 = document.createElement('div');
+    track1.className = 'product-tabs-marquee-track';
+    originalButtons.forEach(btn => track1.appendChild(btn));
+
+    // Track 2 (Clone for seamless continuous loop on mobile)
+    const track2 = document.createElement('div');
+    track2.className = 'product-tabs-marquee-track tabs-clone';
+    track2.setAttribute('aria-hidden', 'true');
+    originalButtons.forEach(btn => {
+      const clone = btn.cloneNode(true);
+      const clickAttr = btn.getAttribute('onclick');
+      if (clickAttr) {
+        clone.setAttribute('onclick', clickAttr);
+      }
+      track2.appendChild(clone);
+    });
+
+    marqueeContainer.appendChild(track1);
+    marqueeContainer.appendChild(track2);
+    header.appendChild(marqueeContainer);
+  });
+}
+
+// Global Product Detail Tabs Switcher with Synchronized Active State Across Loops
 window.switchProductTab = function (evt, tabId) {
+  if (evt) {
+    if (evt.preventDefault) evt.preventDefault();
+  }
+
   const tabPanes = document.getElementsByClassName("product-tab-pane");
   for (let i = 0; i < tabPanes.length; i++) {
     tabPanes[i].style.display = "none";
     tabPanes[i].classList.remove("active");
-  }
-
-  const tabBtns = document.getElementsByClassName("product-tab-btn");
-  for (let i = 0; i < tabBtns.length; i++) {
-    tabBtns[i].classList.remove("active");
   }
 
   const activePane = document.getElementById(tabId);
@@ -1668,11 +1706,21 @@ window.switchProductTab = function (evt, tabId) {
     activePane.classList.add("active");
   }
 
-  if (evt && evt.currentTarget) {
-    evt.currentTarget.classList.add("active");
-    // Smoothly scroll clicked tab into view on mobile
-    try {
-      evt.currentTarget.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-    } catch (e) {}
-  }
+  // Synchronize active class on all buttons matching tabId (both main track & clone track)
+  const allTabBtns = document.querySelectorAll(".product-tab-btn");
+  allTabBtns.forEach(btn => {
+    const clickAttr = btn.getAttribute("onclick") || "";
+    if (clickAttr.includes(tabId)) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
 };
+
+// Also trigger tab marquee init on DOMContentLoaded or immediate execution
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initProductTabsMarquee);
+} else {
+  initProductTabsMarquee();
+}
