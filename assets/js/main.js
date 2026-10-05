@@ -172,46 +172,141 @@ function initPageScripts() {
   // Products Filtering Search & Category Filter (for products.html)
   const searchInput = document.getElementById('productSearch');
   const categoryFilter = document.getElementById('categorySelect');
-  const productCards = document.querySelectorAll('.product-card, .product-card-item');
+  const catalogGrid = document.getElementById('catalogGrid') || document.getElementById('productGrid');
+  const productCards = catalogGrid ? catalogGrid.querySelectorAll('.product-card, .product-card-item') : document.querySelectorAll('.product-card, .product-card-item');
+
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+  const clearFiltersLink = document.getElementById('clearFiltersLink');
+  const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+  const visibleCountEl = document.getElementById('visibleCount');
+  const totalCountEl = document.getElementById('totalCount');
+  const noResultsEl = document.getElementById('noProductsFound');
+
+  function normalizeText(str) {
+    return (str || '').toLowerCase().replace(/[^a-z0-9]/g, ' ');
+  }
+
+  function matchSearchQuery(searchTerm, title, category, text, tag) {
+    if (!searchTerm) return true;
+    const tokens = searchTerm.toLowerCase().split(/\s+/).filter(Boolean);
+    if (tokens.length === 0) return true;
+
+    const rawCombined = `${title} ${category} ${text} ${tag}`.toLowerCase();
+    const normCombined = normalizeText(rawCombined);
+
+    return tokens.every(token => {
+      const normToken = token.replace(/[^a-z0-9]/g, '');
+      if (token.length > 0 && rawCombined.includes(token)) return true;
+      if (normToken.length > 0 && normCombined.includes(normToken)) return true;
+      return false;
+    });
+  }
+
+  function matchCategory(selectedCategory, cardCategory) {
+    if (!selectedCategory || selectedCategory === 'all') return true;
+    const sel = selectedCategory.toLowerCase().trim();
+    const cardCats = cardCategory.toLowerCase().split(/\s+/);
+    return cardCats.includes(sel) || cardCategory.toLowerCase().includes(sel);
+  }
 
   function filterProducts() {
-    const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
-    const selectedCategory = categoryFilter ? categoryFilter.value.toLowerCase() : 'all';
+    const rawSearch = searchInput ? searchInput.value : '';
+    const searchTerm = rawSearch.trim();
+    const selectedCategory = categoryFilter ? categoryFilter.value : 'all';
+
+    let visibleCount = 0;
+    const totalCount = productCards.length;
 
     productCards.forEach(card => {
-      const title = card.getAttribute('data-title') ? card.getAttribute('data-title').toLowerCase() : '';
-      const category = card.getAttribute('data-category') ? card.getAttribute('data-category').toLowerCase() : '';
-      const text = card.textContent.toLowerCase();
+      const title = card.getAttribute('data-title') || '';
+      const category = card.getAttribute('data-category') || '';
+      const tag = card.querySelector('.product-tag') ? card.querySelector('.product-tag').textContent : '';
+      const text = card.textContent || '';
 
-      const matchesSearch = searchTerm === '' || title.includes(searchTerm) || text.includes(searchTerm);
-      const matchesCategory = selectedCategory === 'all' || category === selectedCategory || category.split(/\s+/).includes(selectedCategory);
+      const matchesSearch = matchSearchQuery(searchTerm, title, category, text, tag);
+      const matchesCat = matchCategory(selectedCategory, category);
 
-      if (matchesSearch && matchesCategory) {
-        card.style.display = '';
+      if (matchesSearch && matchesCat) {
+        card.classList.remove('is-hidden');
+        card.style.setProperty('display', 'flex', 'important');
+        card.classList.add('revealed');
+        card.style.opacity = '1';
+        card.style.transform = 'translate(0, 0) scale(1)';
+        visibleCount++;
       } else {
-        card.style.display = 'none';
+        card.classList.add('is-hidden');
+        card.style.setProperty('display', 'none', 'important');
       }
     });
+
+    if (visibleCountEl) visibleCountEl.textContent = visibleCount;
+    if (totalCountEl) totalCountEl.textContent = totalCount;
+
+    if (clearSearchBtn) {
+      clearSearchBtn.style.display = rawSearch.length > 0 ? 'flex' : 'none';
+    }
+
+    const isFiltered = rawSearch.length > 0 || selectedCategory !== 'all';
+    if (clearFiltersLink) {
+      clearFiltersLink.style.display = isFiltered ? 'inline-block' : 'none';
+    }
+
+    if (noResultsEl) {
+      noResultsEl.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+  }
+
+  function resetAllFilters() {
+    if (searchInput) searchInput.value = '';
+    if (categoryFilter) categoryFilter.value = 'all';
+    filterProducts();
   }
 
   if (searchInput) {
     searchInput.addEventListener('input', filterProducts);
+    searchInput.addEventListener('keyup', filterProducts);
   }
   if (categoryFilter) {
     categoryFilter.addEventListener('change', filterProducts);
   }
+  if (clearSearchBtn) {
+    clearSearchBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      filterProducts();
+      if (searchInput) searchInput.focus();
+    });
+  }
+  if (clearFiltersLink) {
+    clearFiltersLink.addEventListener('click', resetAllFilters);
+  }
+  if (resetFiltersBtn) {
+    resetFiltersBtn.addEventListener('click', resetAllFilters);
+  }
 
-  // Auto-select category from URL parameter on products.html
-  const initialCategory = urlParams.get('category');
+  // Auto-select category from URL parameter on products.html with smart alias mapping
+  function mapCategoryAlias(cat) {
+    if (!cat) return 'all';
+    const c = cat.toLowerCase().trim();
+    if (c === 'all') return 'all';
+    if (c.includes('switch')) return 'level-switch';
+    if (c.includes('transmit')) return 'level-transmitter';
+    if (c.includes('indicat') || c.includes('gauge')) return 'level-indicator';
+    if (c.includes('pressur')) return 'pressure-instruments';
+    return c;
+  }
+
+  const rawInitialCategory = urlParams.get('category');
+  const initialCategory = mapCategoryAlias(rawInitialCategory);
   if (initialCategory && categoryFilter) {
     categoryFilter.value = initialCategory;
     filterProducts();
-    const catalogGrid = document.getElementById('catalogGrid') || document.getElementById('productGrid');
     if (catalogGrid) {
       setTimeout(() => {
         catalogGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 200);
     }
+  } else if (searchInput || categoryFilter) {
+    filterProducts();
   }
 
   // Auto-populate inquiry on contact.html
@@ -263,7 +358,7 @@ function initPageScripts() {
         },
         body: JSON.stringify({
           _subject: `New Contact Inquiry: ${subject}`,
-          _cc: 'sales@levtron.in',
+          _cc: 'sales@levtron.in,sales1@levtron.in',
           _template: 'table',
           _captcha: 'false',
           'Customer Name': name,
@@ -318,7 +413,7 @@ function initPageScripts() {
     }
 
     function startAutoSlide() {
-      if (!slideTimer) slideTimer = setInterval(autoNextSlide, 1230);
+      if (!slideTimer) slideTimer = setInterval(autoNextSlide, 4500);
     }
 
     function stopAutoSlide() {
@@ -1185,7 +1280,7 @@ window.handleQuoteModalSubmit = function (e) {
       },
       body: JSON.stringify({
         _subject: `New Industrial Quote Request: ${product}`,
-        _cc: 'sales@levtron.in',
+        _cc: 'sales@levtron.in,sales1@levtron.in',
         _template: 'table',
         _captcha: 'false',
         'Customer Name': name,
@@ -1463,7 +1558,7 @@ window.handlePdfGateSubmit = function (e) {
     },
     body: JSON.stringify({
       _subject: `New Document Access Lead: ${docTitle}`,
-      _cc: 'sales@levtron.in',
+      _cc: 'sales@levtron.in,sales1@levtron.in',
       _template: 'table',
       _captcha: 'false',
       'Customer Name': name,

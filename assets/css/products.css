@@ -25,7 +25,7 @@
 
 .product-card,
 .glass-card.product-card {
-  display: flex !important;
+  display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
@@ -39,6 +39,11 @@
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+}
+
+.product-card.is-hidden,
+.glass-card.product-card.is-hidden {
+  display: none !important;
 }
 
 .product-card:hover,

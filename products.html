@@ -7,6 +7,13 @@
   <title>Products Catalog | Levtron Instruments Pvt Ltd</title>
   <meta name="description"
     content="Explore Levtron's complete industrial instrumentation catalog: Level Switches (22 models), Level Transmitters, Level Indicators, and Pressure Instruments.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/products.css">
@@ -40,6 +47,9 @@
 
     <div class="container" style="text-align: center; position: relative; z-index: 2;">
       <div class="section-title banner-title" style="margin-bottom: 0;">
+        <div class="hero-welcome-title-group banner-welcome-group">
+          <div class="hero-welcome-brand">Levtron Instruments PVT LTD</div>
+        </div>
         <span class="subtitle">Complete Product Line</span>
         <h2>Industrial Level &amp; <span>Pressure Instrumentation</span></h2>
         <p style="max-width: 720px; margin: 1rem auto 0; font-size: 1.12rem; color: #cbd5e1;">
@@ -80,14 +90,20 @@
   <section class="section" style="padding-top: 3rem;">
     <div class="container">
       <!-- Live Search & Category Dropdown Bar -->
-      <div class="glass-card" style="padding: 1.5rem; margin-bottom: 3rem;">
+      <div class="glass-card filter-card-wrapper" style="padding: 1.5rem; margin-bottom: 2rem;">
         <div class="products-filter-bar">
-          <div>
+          <div class="search-input-wrapper" style="position: relative;">
+            <i class="fas fa-search search-input-icon" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 1rem; pointer-events: none;"></i>
             <input type="text" class="form-control" id="productSearch"
-              placeholder="🔍 Search model (e.g. RFLS-100S, VFLS-700L, Radar, Magnetic, Pressure)...">
+              placeholder="Search model, code or keyword (e.g. RFLS-100S, VFLS-700L, Radar, Magnetic)..."
+              style="padding-left: 2.75rem; padding-right: 2.5rem; height: 48px; border-radius: 10px;">
+            <button type="button" id="clearSearchBtn" aria-label="Clear Search"
+              style="display: none; position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: #e2e8f0; border: none; width: 24px; height: 24px; border-radius: 50%; color: #475569; cursor: pointer; align-items: center; justify-content: center; font-size: 0.75rem;">
+              <i class="fas fa-times"></i>
+            </button>
           </div>
           <div>
-            <select class="form-control" id="categorySelect" style="font-weight: 600; cursor: pointer;">
+            <select class="form-control" id="categorySelect" style="font-weight: 600; cursor: pointer; height: 48px; border-radius: 10px;">
               <option value="all">All Products (Full Range)</option>
               <option value="level-switch">1. Level Switch (22 Models)</option>
               <option value="level-transmitter">2. Level Transmitter</option>
@@ -96,6 +112,30 @@
             </select>
           </div>
         </div>
+
+        <!-- Filter Status Bar -->
+        <div class="filter-results-info" id="filterResultsInfo" style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; font-size: 0.92rem; color: #475569; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            Showing <strong id="visibleCount" style="color: var(--color-blue, #0284c7); font-weight: 700;">31</strong> of <span id="totalCount">31</span> items
+          </div>
+          <button type="button" id="clearFiltersLink" class="btn-text" style="display: none; background: none; border: none; color: #ef4444; font-weight: 600; font-size: 0.85rem; cursor: pointer; text-decoration: underline; padding: 0;">
+            <i class="fas fa-undo" style="margin-right: 0.3rem;"></i> Clear Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- No Products Found Empty State -->
+      <div id="noProductsFound" class="glass-card product-no-results" style="display: none; text-align: center; padding: 3.5rem 1.5rem; margin-bottom: 3rem; border-radius: 16px; background: #ffffff;">
+        <div style="width: 70px; height: 70px; margin: 0 auto 1.25rem; background: rgba(2, 132, 199, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-search" style="font-size: 2rem; color: var(--color-blue, #0284c7);"></i>
+        </div>
+        <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: #0f172a; font-weight: 700;">No Matching Products Found</h3>
+        <p style="color: #64748b; max-width: 480px; margin: 0 auto 1.5rem; font-size: 0.95rem; line-height: 1.6;">
+          We couldn't find any instruments matching your criteria. Try checking for spelling errors, using simpler keywords, or selecting another category.
+        </p>
+        <button type="button" id="resetFiltersBtn" class="btn btn-primary btn-sm" style="padding: 0.6rem 1.25rem; border-radius: 8px;">
+          <i class="fas fa-redo-alt" style="margin-right: 0.5rem;"></i> Reset All Filters
+        </button>
       </div>
 
       <!-- Product Cards Catalog Grid -->
@@ -861,7 +901,8 @@
             <div
               style="font-size: 0.75rem; color: var(--primary-cyan); font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">
               Magnetic Series</div>
-            <h3><a href="product-lmlt-2100lt.html" style="color: inherit; text-decoration: none;">Magnetic Level Gauge & Indicator (MLI)</a></h3>
+            <h3><a href="product-lmlt-2100lt.html" style="color: inherit; text-decoration: none;">Magnetic Level Gauge &
+                Indicator (MLI)</a></h3>
             <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">Side & Top
               mounted non-invasive chamber with bicolor magnetic flappers or follower capsule. Safe visual indication
               for aggressive, flammable, toxic, and pressurized tanks.</p>
@@ -888,7 +929,8 @@
             <div
               style="font-size: 0.75rem; color: var(--primary-cyan); font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">
               Tubular Series</div>
-            <h3><a href="product-ltli-2200l.html" style="color: inherit; text-decoration: none;">Tubular Level Indicator (LTLI-2200L)</a></h3>
+            <h3><a href="product-ltli-2200l.html" style="color: inherit; text-decoration: none;">Tubular Level Indicator
+                (LTLI-2200L)</a></h3>
             <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">Simple and
               reliable device for direct visual reading in atmospheric or pressurized tanks with 100% PTFE bush packing,
               360° Tie-rods/C-channel guards, and C/C distance up to 2000mm.</p>
@@ -915,7 +957,8 @@
             <div
               style="font-size: 0.75rem; color: var(--primary-cyan); font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">
               Float & Board Series</div>
-            <h3><a href="product-fbli-2400l.html" style="color: inherit; text-decoration: none;">Float & Board Level Indicator (FBLI-2400L)</a></h3>
+            <h3><a href="product-fbli-2400l.html" style="color: inherit; text-decoration: none;">Float & Board Level
+                Indicator (FBLI-2400L)</a></h3>
             <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">Designed for
               accurate, reliable & trouble-free float operated technique in large non-pressurized storage tanks.
               Measuring range up to 25m with direct CI pointer or follower magnet.</p>
@@ -944,7 +987,8 @@
             <div
               style="font-size: 0.75rem; color: var(--primary-cyan); font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">
               Pressure Series</div>
-            <h3><a href="product-qyb100.html" style="color: inherit; text-decoration: none;">Piezoresistive Pressure Transmitter (QYB100)</a></h3>
+            <h3><a href="product-qyb100.html" style="color: inherit; text-decoration: none;">Piezoresistive Pressure
+                Transmitter (QYB100)</a></h3>
             <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">Silicon
               piezoresistive sensor in stainless steel housing with CE approval. Ranges from 100mbar to 1000bar, outputs
               4-20mA / 0-10V / 0-5V, IP65/IP68.</p>

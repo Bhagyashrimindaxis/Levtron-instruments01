@@ -4870,6 +4870,142 @@ body.modal-open {
   border-radius: 12px;
 }
 
+/* Hero Welcome Typography (2-Line High Impact Format - Reference Match) */
+.hero-welcome-title-group {
+  margin-bottom: 0.85rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-welcome-lead {
+  font-family: 'Poppins', 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(1.3rem, 2.2vw, 1.85rem);
+  font-weight: 800;
+  color: #ffffff !important;
+  line-height: 1.15;
+  letter-spacing: -0.2px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  width: 100%;
+  text-align: center;
+}
+
+.hero-welcome-brand {
+  font-family: 'Poppins', 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(1.35rem, 2.3vw, 2.4rem);
+  font-weight: 900;
+  color: #3b82f6 !important;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.85), 0 0 20px rgba(59, 130, 246, 0.35);
+  margin-top: 0.15rem;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Staggered entrance animations when slide activates */
+.hero-slide .hero-welcome-title-group {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-slide.active .hero-welcome-title-group {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.05s;
+}
+
+/* Inner Page Banners Welcome Group */
+.banner-welcome-group {
+  margin: 0 auto 0.85rem auto !important;
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  clear: both !important;
+}
+
+.banner-welcome-group .hero-welcome-lead {
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.banner-welcome-group .hero-welcome-brand {
+  font-size: clamp(1.35rem, 2.4vw, 2.25rem);
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.section-title.banner-title .subtitle {
+  display: inline-flex !important;
+  margin: 0 auto 0.75rem auto !important;
+}
+
+.hero-slide .hero-eyebrow-tag {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-slide.active .hero-eyebrow-tag {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.12s;
+}
+
+.hero-slide .hero-main-title {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-slide.active .hero-main-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.18s;
+}
+
+.hero-slide .hero-main-desc {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-slide.active .hero-main-desc {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.24s;
+}
+
+.hero-slide .hero-btn-wrap {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-slide.active .hero-btn-wrap {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+
+.hero-slide .hero-split-visual {
+  opacity: 0;
+  transform: scale(0.96) translateY(12px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-slide.active .hero-split-visual {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition-delay: 0.15s;
+}
+
 @keyframes heroContentFadeIn {
   from {
     opacity: 0;
@@ -5370,6 +5506,24 @@ body.modal-open {
     align-items: center;
     text-align: center;
     padding: 0 0.5rem;
+  }
+
+  .hero-welcome-title-group {
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0.45rem;
+  }
+
+  .hero-welcome-lead {
+    font-size: clamp(0.95rem, 3.4vw, 1.25rem);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .hero-welcome-brand {
+    font-size: clamp(1.15rem, 4.2vw, 1.65rem);
+    text-align: center;
+    white-space: nowrap;
   }
 
   .hero-split-text .hero-eyebrow-tag {
