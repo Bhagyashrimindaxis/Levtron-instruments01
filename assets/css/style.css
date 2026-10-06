@@ -236,8 +236,8 @@ img {
 .page-title-banner {
   position: relative;
   overflow: hidden;
-  background: #0a0b0e;
-  padding: 4.75rem 0 5.25rem;
+  background: #070a12;
+  padding: 5.25rem 0 5.75rem;
 }
 
 .banner-bg-strip {
@@ -256,8 +256,8 @@ img {
   position: relative;
   height: 100%;
   overflow: hidden;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  background: #111418;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  background: #090d16;
 }
 
 .banner-bg-item:last-child {
@@ -269,7 +269,7 @@ img {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: brightness(0.92) contrast(1.05);
+  filter: brightness(0.62) contrast(1.18);
   transform: scale(1.04);
   transition: transform 0.6s ease;
 }
@@ -280,7 +280,8 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(10, 15, 28, 0.42) 0%, rgba(10, 15, 28, 0.48) 50%, rgba(10, 15, 28, 0.64) 100%);
+  background: radial-gradient(circle at center 40%, rgba(56, 189, 248, 0.14) 0%, transparent 68%),
+              linear-gradient(180deg, rgba(7, 10, 18, 0.82) 0%, rgba(10, 15, 28, 0.88) 50%, rgba(7, 10, 18, 0.95) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -289,23 +290,39 @@ img {
 .page-title-banner .banner-title h2,
 .page-title-banner h1,
 .page-title-banner h2 {
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+  color: #ffffff !important;
+  font-family: 'Outfit', 'Poppins', 'Montserrat', sans-serif;
+  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.95), 0 0 30px rgba(56, 189, 248, 0.25);
+  margin-top: 0.35rem;
 }
 
 .page-title-banner p {
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+  color: #cbd5e1 !important;
+  font-size: clamp(0.98rem, 1.4vw, 1.15rem);
+  font-weight: 500;
+  line-height: 1.6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
 }
 
 .banner-breadcrumb {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  margin-top: 1rem;
-  font-size: 0.98rem;
+  gap: 0.65rem;
+  margin-top: 1.4rem;
+  padding: 0.45rem 1.4rem;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 30px;
+  font-size: 0.92rem;
   font-weight: 600;
   color: #ffffff;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 .banner-breadcrumb a {
@@ -315,17 +332,18 @@ img {
 }
 
 .banner-breadcrumb a:hover {
-  color: #ffffff;
+  color: #38bdf8;
   text-decoration: underline;
 }
 
 .banner-breadcrumb .separator {
-  color: var(--color-blue);
+  color: #38bdf8;
   font-weight: 700;
 }
 
 .banner-breadcrumb .current {
   color: #ffffff;
+  font-weight: 700;
 }
 
 @media (max-width: 991px) {
@@ -4877,6 +4895,13 @@ body.modal-open {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
 }
 
 .hero-welcome-lead {
@@ -4887,123 +4912,295 @@ body.modal-open {
   line-height: 1.15;
   letter-spacing: -0.2px;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-  width: 100%;
+  width: auto;
   text-align: center;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  margin: 0 0 0.25rem 0 !important;
 }
 
 .hero-welcome-brand {
-  font-family: 'Poppins', 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(1.35rem, 2.3vw, 2.4rem);
-  font-weight: 900;
-  color: #3b82f6 !important;
-  line-height: 1.15;
-  letter-spacing: -0.5px;
-  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.85), 0 0 20px rgba(59, 130, 246, 0.35);
-  margin-top: 0.15rem;
-  width: 100%;
-  text-align: center;
+  font-family: 'Outfit', 'Poppins', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(1.35rem, 2.4vw, 2.4rem);
+  font-weight: 800;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #ffffff 30%, #e0f2fe 70%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.25;
+  letter-spacing: 0.5px;
+  margin-top: 0.25rem;
+  display: inline-block;
+  padding: 0.4rem 1.6rem;
+  background-color: rgba(10, 15, 28, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 50px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.65), 0 0 15px rgba(56, 189, 248, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.9));
   white-space: nowrap;
 }
 
-/* Staggered entrance animations when slide activates */
+/* =========================================================================
+   HERO SLIDER DIRECTIONAL SLIDE ANIMATIONS (LEFT TEXT / RIGHT IMAGE)
+   ========================================================================= */
+
+/* Left Side Text Column Slide from Left */
+.hero-slide .hero-split-text {
+  opacity: 0;
+  transform: translateX(-75px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-slide.active .hero-split-text {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.08s;
+}
+
+/* Up to Down Entrance Animation for Welcome to Levtron Instruments Pvt.Ltd (Animates on every slide change) */
 .hero-slide .hero-welcome-title-group {
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(-50px);
 }
 
 .hero-slide.active .hero-welcome-title-group {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.05s;
+  animation: heroWelcomeUpDown 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
 }
 
-/* Inner Page Banners Welcome Group */
-.banner-welcome-group {
-  margin: 0 auto 0.85rem auto !important;
-  display: block !important;
-  width: 100% !important;
-  text-align: center !important;
-  clear: both !important;
+.page-title-banner .hero-welcome-brand {
+  animation: heroWelcomeUpDown 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards,
+             animBrandAmbientFloat 5s ease-in-out infinite 1.1s;
 }
 
-.banner-welcome-group .hero-welcome-lead {
-  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
-  display: block;
-  width: 100%;
-  text-align: center;
+.hero-slide.active .hero-welcome-brand {
+  animation: animBrandAmbientFloat 5s ease-in-out infinite 0.9s;
 }
 
-.banner-welcome-group .hero-welcome-brand {
-  font-size: clamp(1.35rem, 2.4vw, 2.25rem);
-  display: block;
-  width: 100%;
-  text-align: center;
+@keyframes heroWelcomeUpDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.92);
+    filter: blur(10px);
+  }
+  68% {
+    opacity: 1;
+    transform: translateY(4px) scale(1.02);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
 
-.section-title.banner-title .subtitle {
-  display: inline-flex !important;
-  margin: 0 auto 0.75rem auto !important;
+@keyframes animBrandAmbientFloat {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.65), 0 0 15px rgba(56, 189, 248, 0.25);
+  }
+  50% {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75), 0 0 25px rgba(56, 189, 248, 0.45);
+  }
 }
 
-.hero-slide .hero-eyebrow-tag {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+/* 2. Subtitle Pill Tag (.subtitle - Corporate Profile) */
+.page-title-banner .subtitle {
+  animation: animSubtitle3DFlip 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
 }
 
-.hero-slide.active .hero-eyebrow-tag {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.12s;
+@keyframes animSubtitle3DFlip {
+  0% {
+    opacity: 0;
+    transform: perspective(600px) rotateX(-85deg) translateY(-15px) scale(0.88);
+    letter-spacing: 6px;
+    filter: blur(8px);
+  }
+  65% {
+    opacity: 1;
+    transform: perspective(600px) rotateX(12deg) scale(1.03);
+    letter-spacing: 2px;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(600px) rotateX(0deg) scale(1);
+    letter-spacing: 2px;
+    filter: blur(0);
+  }
+}
+
+/* 3. Main Heading (h2 / h1 / .hero-main-title) */
+.page-title-banner .section-title h2,
+.page-title-banner .banner-title h2,
+.page-title-banner h1 {
+  animation: animHeadingKineticDrop 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
 }
 
 .hero-slide .hero-main-title {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-65px);
 }
 
 .hero-slide.active .hero-main-title {
   opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.18s;
+  transform: translateX(0);
+  animation: heroTextSlideFromLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.28s forwards;
+}
+
+@keyframes animHeadingKineticDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-38px) scale(0.92);
+    filter: blur(12px);
+  }
+  60% {
+    opacity: 0.85;
+    transform: translateY(3px) scale(1.01);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* 4. Description Paragraph (p / .hero-main-desc) */
+.page-title-banner p {
+  animation: animDescSmoothRise 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.62s forwards;
 }
 
 .hero-slide .hero-main-desc {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-65px);
 }
 
 .hero-slide.active .hero-main-desc {
   opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.24s;
+  transform: translateX(0);
+  animation: heroTextSlideFromLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.38s forwards;
 }
 
+@keyframes animDescSmoothRise {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* 5. Breadcrumb Container (.banner-breadcrumb) */
+.page-title-banner .banner-breadcrumb {
+  animation: animBreadcrumbElasticSpring 1.05s cubic-bezier(0.34, 1.56, 0.64, 1) 0.78s forwards;
+}
+
+@keyframes animBreadcrumbElasticSpring {
+  0% {
+    opacity: 0;
+    transform: translateY(42px) scale(0.86);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 6. Hero Eyebrow Tag (.hero-eyebrow-tag) */
+.hero-slide .hero-eyebrow-tag {
+  opacity: 0;
+  transform: translateX(-65px);
+}
+
+.hero-slide.active .hero-eyebrow-tag {
+  opacity: 1;
+  transform: translateX(0);
+  animation: heroTextSlideFromLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards;
+}
+
+/* 7. Hero CTA Button (.hero-btn-wrap) */
 .hero-slide .hero-btn-wrap {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-65px);
 }
 
 .hero-slide.active .hero-btn-wrap {
   opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.3s;
+  transform: translateX(0);
+  animation: heroTextSlideFromLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.48s forwards;
 }
 
+/* Text Slide Keyframe from Left */
+@keyframes heroTextSlideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-70px);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+/* Right Side Image Column Slide from Right */
 .hero-slide .hero-split-visual {
   opacity: 0;
-  transform: scale(0.96) translateY(12px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(80px) scale(0.95);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-slide.active .hero-split-visual {
   opacity: 1;
-  transform: scale(1) translateY(0);
-  transition-delay: 0.15s;
+  transform: translateX(0) scale(1);
+  animation: heroImageSlideFromRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+
+@keyframes heroImageSlideFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(85px) scale(0.93);
+    filter: blur(6px);
+  }
+  75% {
+    transform: translateX(-4px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Inner Page Banners Welcome Group Structure */
+.banner-welcome-group {
+  margin: 0 auto 1.1rem auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  text-align: center !important;
+  clear: both !important;
 }
 
 @keyframes heroContentFadeIn {
@@ -5518,12 +5715,17 @@ body.modal-open {
     font-size: clamp(0.95rem, 3.4vw, 1.25rem);
     text-align: center;
     white-space: nowrap;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
   }
 
   .hero-welcome-brand {
-    font-size: clamp(1.15rem, 4.2vw, 1.65rem);
+    font-size: clamp(0.95rem, 3.8vw, 1.45rem);
+    padding: 0.35rem 1.1rem;
+    white-space: normal;
+    word-break: break-word;
     text-align: center;
-    white-space: nowrap;
   }
 
   .hero-split-text .hero-eyebrow-tag {
@@ -7700,15 +7902,15 @@ border: 1px solid rgba(255, 255, 255, 0.2);
 .hero-feature-bar-section {
   position: relative;
   z-index: 25;
-  margin-top: 2.25rem;
-  margin-bottom: 2.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.75rem;
   padding: 0;
 }
 
 .hero-feature-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1.25rem;
+  gap: 0.85rem;
   align-items: stretch;
 }
 
@@ -7718,23 +7920,49 @@ border: 1px solid rgba(255, 255, 255, 0.2);
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 1.5rem 1rem;
+  padding: 0.9rem 0.75rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  box-shadow: 0 10px 25px rgba(10, 11, 14, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 6px 18px rgba(10, 11, 14, 0.06), 0 2px 4px rgba(0, 0, 0, 0.03);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 135px;
+  min-height: 98px;
   z-index: 1;
+  opacity: 0;
 }
 
-/* 2nd image decorative circular/curved water-drop overlay animation */
+/* Staggered entrance animation for cards */
+.hero-feature-card:nth-child(1) { animation: featureCardEntrance 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s forwards; }
+.hero-feature-card:nth-child(2) { animation: featureCardEntrance 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards; }
+.hero-feature-card:nth-child(3) { animation: featureCardEntrance 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards; }
+.hero-feature-card:nth-child(4) { animation: featureCardEntrance 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s forwards; }
+.hero-feature-card:nth-child(5) { animation: featureCardEntrance 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards; }
+
+@keyframes featureCardEntrance {
+  0% {
+    opacity: 0;
+    transform: perspective(800px) translateY(32px) rotateX(16deg) scale(0.9);
+    filter: blur(4px);
+  }
+  75% {
+    opacity: 1;
+    transform: perspective(800px) translateY(-3px) rotateX(0deg) scale(1.02);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(800px) translateY(0) rotateX(0deg) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Decorative circular overlay animation */
 .hero-feature-card::before {
   content: '';
   position: absolute;
@@ -7770,10 +7998,10 @@ border: 1px solid rgba(255, 255, 255, 0.2);
 .hero-feature-card:hover,
 .hero-feature-card:active,
 .hero-feature-card.active {
-  transform: translateY(-8px);
+  transform: translateY(-6px) scale(1.02);
   background-color: var(--color-blue);
   border-color: var(--color-blue);
-  box-shadow: 0 20px 38px rgba(37, 99, 235, 0.32), 0 8px 16px rgba(37, 99, 235, 0.18);
+  box-shadow: 0 16px 32px rgba(37, 99, 235, 0.3), 0 6px 12px rgba(37, 99, 235, 0.16);
 }
 
 .hero-feature-card:hover::before,
@@ -7793,30 +8021,30 @@ border: 1px solid rgba(255, 255, 255, 0.2);
 .hero-feature-icon {
   position: relative;
   z-index: 2;
-  font-size: 2.1rem;
+  font-size: 1.65rem;
   color: var(--color-blue);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.45rem;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 44px;
+  height: 32px;
 }
 
 .hero-feature-card:hover .hero-feature-icon,
 .hero-feature-card:active .hero-feature-icon,
 .hero-feature-card.active .hero-feature-icon {
-  transform: scale(1.12);
+  transform: scale(1.18) rotate(5deg);
   color: #ffffff;
 }
 
 .hero-feature-title {
   position: relative;
   z-index: 2;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: #0f172a;
-  line-height: 1.35;
+  line-height: 1.3;
   margin: 0;
   transition: color 0.3s ease;
 }
